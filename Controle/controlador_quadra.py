@@ -5,4 +5,3 @@ class ControladorQuadra(AbstractControladorQuadra):
         super().__init__()
         self.__lista_quadras = []
 
-    

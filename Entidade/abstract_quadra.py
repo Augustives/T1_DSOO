@@ -13,34 +13,34 @@ class AbstractQuadra(ABC):
     @property
     @abstractmethod
     def esporte(self):
-        return self.__esporte
+        pass
 
 
     @esporte.setter
     @abstractmethod
     def esporte(self, esporte):
-        self.__esporte = esporte
+        pass
 
 
     @property
     @abstractmethod
     def tipo(self):
-        return self.__tipo
+        pass
 
 
     @tipo.setter
     @abstractmethod
     def tipo(self, tipo):
-        self.__tipo = tipo
+        pass
 
 
     @property
     @abstractmethod
     def identificador(self):
-        return self.__identificador
+        pass
 
 
     @identificador.setter
     @abstractmethod
     def identificador(self, identificador):
-        self.__identificador = identificador
+        pass

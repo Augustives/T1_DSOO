@@ -13,39 +13,39 @@ class AbstractPessoa(ABC):
     @property
     @abstractmethod
     def nome(self):
-        return self.__nome
+        pass
 
     @nome.setter
     @abstractmethod
     def nome(self, nome):
-        self.__nome = nome
+        pass
 
     @property
     @abstractmethod
     def cpf(self)
-        return self.__cpf
+        pass
 
     @cpf.setter
     @abstractmethod
     def cpf(self, cpf):
-        self.__cpf = cpf
+        pass
 
     @property
     @abstractmethod
     def telefone(self):
-        return self.__telefone
+        pass
 
     @telefone.setter
     @abstractmethod
     def telefone(self, telefone):
-        self.__telefone = telefone
+        pass
 
     @property
     @abstractmethod
     def email(self):
-        return self.__email
+        pass
 
     @email.setter
     @abstractmethod
     def email(self, email):
-        self.__email = email
+        pass

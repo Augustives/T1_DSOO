@@ -14,19 +14,19 @@ class AbstractAluguel(ABC):
     @property
     @abstractmethod
     def pessoa(self):
-        return self.__pessoa
+        pass
 
     @property
     @abstractmethod
     def quadra(self):
-        return self__quadra
+        pass
 
     @property
     @abstractmethod
     def data_str(self):
-        return self__data_str
+        pass
 
     @property
     @abstractmethod
     def data_date(self):
-        return self.__data_date
+        pass
