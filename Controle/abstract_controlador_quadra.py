@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class AbstractControladorQuadra(ABC):
     @abstractmethod
     def __init__(self):
@@ -23,11 +24,11 @@ class AbstractControladorQuadra(ABC):
         pass
 
     @abstractmethod
-    def lista_quadras_tipo(self):
+    def lista_quadras_tipo(self, tipo):
         pass
 
     @abstractmethod
-    def lista_quadras_esporte(self):
+    def lista_quadras_esporte(self, esporte):
         pass
 
     @abstractmethod

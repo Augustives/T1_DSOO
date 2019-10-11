@@ -1,11 +1,10 @@
 from abc import ABC, abstractmethod
-from typing import Dict, Any
 
 
 class AbstractControladorAluguel(ABC):
     @abstractmethod
     def __init__(self):
-        dict_aluguel: Dict[cpf, aluguel] = {}
+        self.__dict_aluguel = {}
         pass
 #Lista de dicionarios separados por mes ?
 
