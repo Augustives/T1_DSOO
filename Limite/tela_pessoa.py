@@ -1,4 +1,4 @@
-from controlador_pessoa import ControladorPessoa
+from Controle.controlador_pessoa import ControladorPessoa
 
 
 class TelaPessoa:
