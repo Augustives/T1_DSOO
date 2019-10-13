@@ -1,8 +1,9 @@
-from controle.controlador_pessoa import ControladorPessoa
 from limite.abstract_tela import AbstractTela
 
 
 class TelaPessoa(AbstractTela):
+    from controle.controlador_pessoa import ControladorPessoa
+
     def __init__(self, controlador: ControladorPessoa):
         super().__init__()
         self.__controlador = controlador
@@ -23,15 +24,16 @@ class TelaPessoa(AbstractTela):
 
     @staticmethod
     def tela_add_pessoa():
-        print("Você escolheu cadastrar um novo usuário."
+        print("Você escolheu cadastrar um novo usuário. \n"
               "Informe os dados do usuário, por favor.")
         while True:
             try:
                 nome = str(input("Nome: "))
-                cpf = int(input("CPF: "))
+                cpf = str(input("CPF: "))
                 telefone = int(input("Telefone: "))
                 email = str(input("E-mail: "))
-                if nome == "" or email == "" or len(str(cpf)) != 11:
+                if (nome == "" or email == "" or
+                        len(cpf) != 11 or not cpf.isdigit()):
                     raise ValueError
                 return nome, cpf, telefone, email
             except ValueError:
@@ -44,8 +46,8 @@ class TelaPessoa(AbstractTela):
               "Informe o CPF do usuário, por favor (Exemplo: 00000000800).")
         while True:
             try:
-                cpf = int(input("CPF: "))
-                if len(str(cpf)) != 11:
+                cpf = str(input("CPF: "))
+                if len(cpf) != 11 or not cpf.isdigit():
                     raise ValueError
                 return cpf
             except ValueError:
@@ -56,8 +58,8 @@ class TelaPessoa(AbstractTela):
         print("Você escolheu alterar as informações de um usuário existente.")
         while True:
             try:
-                cpf = int(input("Por favor, informe o CPF do usuário desejado."))
-                if len(str(cpf)) != 11:
+                cpf = str(input("Por favor, informe o CPF do usuário desejado."))
+                if len(cpf) != 11 or not cpf.isdigit():
                     raise ValueError
                 print("Por favor, forneça os dados atualizados do usuário.\n"
                       "Caso queira manter os dados atuais, "
@@ -72,16 +74,19 @@ class TelaPessoa(AbstractTela):
     def tela_listar_pessoas(self):
         print("Você escolheu visualizar todos os usuários cadastrados.")
         for pessoa in self.__controlador.lista_pessoas:
-            print(pessoa)
+            print("-"*30)
+            print(pessoa.nome)
+            print(pessoa.cpf)
+            print(pessoa.telefone)
+            print(pessoa.email)
 
     @staticmethod
     def tela_encontrar_pessoa():
         print("Você escolheu encontrar um usuário cadastrado.")
         try:
-            cpf = int(input("Por favor, informe o CPF do usuário desejado."))
-            if len(str(cpf)) != 11:
+            cpf = str(input("Por favor, informe o CPF do usuário desejado."))
+            if len(cpf) != 11 or not cpf.isdigit():
                 raise ValueError
             return cpf
         except ValueError:
             print("CPF inválido. preencha novamente, por favor.")
-

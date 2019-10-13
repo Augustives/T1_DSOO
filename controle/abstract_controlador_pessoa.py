@@ -35,9 +35,5 @@ class AbstractControladorPessoa(ABC):
         pass
 
     @abstractmethod
-    def voltar(self):
-        pass
-
-    @abstractmethod
     def abre_tela_pessoa(self):
         pass

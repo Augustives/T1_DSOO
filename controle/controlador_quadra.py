@@ -1,6 +1,7 @@
 from controle.abstract_controlador_quadra import AbstractControladorQuadra
 from entidade.quadra import Quadra
 
+
 class ControladorQuadra(AbstractControladorQuadra):
     def __init__(self):
         super().__init__()

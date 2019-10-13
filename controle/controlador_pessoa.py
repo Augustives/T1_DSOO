@@ -1,12 +1,11 @@
 from entidade.pessoa import Pessoa
 from entidade.pessoa_duplicada_exception import PessoaDuplicadaException
-from limite.tela_pessoa import TelaPessoa
-from controle.controlador_principal import ControladorPrincipal
 from controle.abstract_controlador_pessoa import AbstractControladorPessoa
 
 
 class ControladorPessoa(AbstractControladorPessoa):
     def __init__(self):
+        from limite.tela_pessoa import TelaPessoa
         super().__init__()
         self.__tela_pessoa = TelaPessoa(self)
         self.__lista_pessoas = list()
@@ -86,7 +85,8 @@ class ControladorPessoa(AbstractControladorPessoa):
 
     @staticmethod
     def voltar():
-        ControladorPrincipal.inicia()
+        from controle.controlador_principal import ControladorPrincipal
+        ControladorPrincipal().inicia()
 
     def abre_tela_pessoa(self):
         escolhas = {1: self.add_pessoa, 2: self.remove_pessoa,

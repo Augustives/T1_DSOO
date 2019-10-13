@@ -1,5 +1,5 @@
 class Pessoa:
-    def __init__(self, nome: str, cpf: int, telefone: int, email: str):
+    def __init__(self, nome: str, cpf: str, telefone: int, email: str):
         self.__nome = nome
         self.__cpf = cpf
         self.__telefone = telefone
@@ -31,7 +31,7 @@ class Pessoa:
 
     @property
     def email(self):
-        return self.__nome
+        return self.__email
 
     @email.setter
     def email(self, email):
