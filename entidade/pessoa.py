@@ -1,5 +1,9 @@
-class Pessoa:
+from entidade.abstract_pessoa import AbstractPessoa
+
+
+class Pessoa(AbstractPessoa):
     def __init__(self, nome: str, cpf: str, telefone: int, email: str):
+        super().__init__()
         self.__nome = nome
         self.__cpf = cpf
         self.__telefone = telefone

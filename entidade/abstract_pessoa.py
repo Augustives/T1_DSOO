@@ -3,11 +3,7 @@ from abc import ABC, abstractmethod
 
 class AbstractPessoa(ABC):
     @abstractmethod
-    def __init__(self, nome: str, cpf: int, telefone: int, email: str):
-        self.__nome = nome
-        self.__cpf = cpf
-        self.__telefone = telefone
-        self.__email = email
+    def __init__(self):
         pass
 
     @property
