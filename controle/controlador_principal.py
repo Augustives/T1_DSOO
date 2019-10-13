@@ -1,4 +1,5 @@
 from controle.controlador_pessoa import ControladorPessoa
+from controle.controlador_aluguel import ControladorAluguel
 from controle.abstract_controlador_principal import AbstractControladorPrincipal
 
 
@@ -30,7 +31,8 @@ class ControladorPrincipal(AbstractControladorPrincipal):
 
     @staticmethod
     def vai_controlador_aluguel():
-        pass
+        ControladorAluguel().inicia()
+
 
 
 

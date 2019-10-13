@@ -1,5 +1,5 @@
 from entidade.pessoa import Pessoa
-from entidade.pessoa_duplicada_exception import PessoaDuplicadaException
+from entidade.cadastro_duplicado_exception import CadastroDuplicadoException
 from controle.abstract_controlador_pessoa import AbstractControladorPessoa
 
 
@@ -18,8 +18,8 @@ class ControladorPessoa(AbstractControladorPessoa):
         try:
             for pessoa in self.__lista_pessoas:
                 if pessoa.cpf == cpf:
-                    raise PessoaDuplicadaException
-        except PessoaDuplicadaException:
+                    raise CadastroDuplicadoException
+        except CadastroDuplicadoException:
             print("Pessoa já cadastrada.")
             self.abre_tela_pessoa()
 
@@ -66,6 +66,7 @@ class ControladorPessoa(AbstractControladorPessoa):
         cpf = self.__tela_pessoa.tela_encontrar_pessoa()
         for pessoa in self.__lista_pessoas:
             if pessoa.cpf == cpf:
+                print("-" * 30)
                 print("DADOS DO USUÁRIO:\n "
                       "CPF: {}\n "
                       "Nome: {}\n "

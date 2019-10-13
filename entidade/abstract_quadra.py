@@ -4,10 +4,7 @@ from abc import ABC, abstractmethod
 class AbstractQuadra(ABC):
 
     @abstractmethod
-    def __init__(self, esporte: str, tipo: str, identificador: int):
-        self.__esporte = esporte
-        self.__tipo = tipo
-        self.__identificador = identificador
+    def __init__(self):
         pass
 
     @property

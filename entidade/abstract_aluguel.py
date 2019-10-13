@@ -1,14 +1,10 @@
 from abc import ABC, abstractmethod
 # https://stackabuse.com/converting-strings-to-datetime-in-python/
 
-class AbstractAluguel(ABC):
 
+class AbstractAluguel(ABC):
     @abstractmethod
-    def __init__(self, pessoa, quadra, data_str: str):
-        self.__pessoa = pessoa
-        self.__quadra = quadra
-        self.__data_str = data_str
-        self.__data_date = datetime.datetime.strptime(data_str, '%Y-%m-%d %H:%M')
+    def __init__(self):
         pass
 
     @property
