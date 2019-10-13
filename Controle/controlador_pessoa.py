@@ -1,5 +1,5 @@
 from Entidade.pessoa import Pessoa
-from pessoa_duplicada_exception import PessoaDuplicadaException
+from Entidade.pessoa_duplicada_exception import PessoaDuplicadaException
 from pessoa_nao_cadastrada_exception import PessoaNaoCadastradaException
 from Limite.tela_pessoa import TelaPessoa
 
