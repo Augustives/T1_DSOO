@@ -1,5 +1,5 @@
-from Controle.abstract_controlador_quadra import AbstractControladorQuadra
-from Entidade.quadra import Quadra
+from controle.abstract_controlador_quadra import AbstractControladorQuadra
+from entidade.quadra import Quadra
 
 class ControladorQuadra(AbstractControladorQuadra):
     def __init__(self):
