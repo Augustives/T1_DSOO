@@ -22,7 +22,7 @@ class AbstractPessoa(ABC):
 
     @property
     @abstractmethod
-    def cpf(self)
+    def cpf(self):
         pass
 
     @cpf.setter

@@ -1,9 +1,11 @@
 from limite.tela_inicial import TelaInicial
 from controle.controlador_pessoa import ControladorPessoa
+from controle.abstract_controlador_principal import AbstractControladorPrincipal
 
 
-class ControladorPrincipal:
+class ControladorPrincipal(AbstractControladorPrincipal):
     def __init__(self):
+        super().__init__()
         self.__tela_inicial = TelaInicial(self)
 
     def inicia(self):

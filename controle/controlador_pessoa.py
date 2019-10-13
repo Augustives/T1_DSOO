@@ -2,10 +2,12 @@ from entidade.pessoa import Pessoa
 from entidade.pessoa_duplicada_exception import PessoaDuplicadaException
 from limite.tela_pessoa import TelaPessoa
 from controle.controlador_principal import ControladorPrincipal
+from controle.abstract_controlador_pessoa import AbstractControladorPessoa
 
 
-class ControladorPessoa:
+class ControladorPessoa(AbstractControladorPessoa):
     def __init__(self):
+        super().__init__()
         self.__tela_pessoa = TelaPessoa(self)
         self.__lista_pessoas = list()
 
