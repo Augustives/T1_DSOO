@@ -1,8 +1,10 @@
 from controle.controlador_pessoa import ControladorPessoa
+from limite.abstract_tela import AbstractTela
 
 
-class TelaPessoa:
+class TelaPessoa(AbstractTela):
     def __init__(self, controlador: ControladorPessoa):
+        super().__init__()
         self.__controlador = controlador
 
     def mostra_opcoes(self):
@@ -18,20 +20,6 @@ class TelaPessoa:
         escolha = self.le_num_inteiro("Escolha uma das opções:",
                                       [1, 2, 3, 4, 5, 0])
         return escolha
-
-    @staticmethod
-    def le_num_inteiro(mensagem: str = "",
-                       inteiros_validos: list = None):
-        while True:
-            try:
-                inteiro = int(input(mensagem))
-                if inteiro not in inteiros_validos:
-                    raise ValueError
-                return inteiro
-            except ValueError:
-                print("Valor incorreto. "
-                      "Digite um valor válido, por favor.")
-                print("Valores válidos:", inteiros_validos)
 
     @staticmethod
     def tela_add_pessoa():
@@ -97,6 +85,3 @@ class TelaPessoa:
         except ValueError:
             print("CPF inválido. preencha novamente, por favor.")
 
-    def voltar(self, escolha):
-        # Terminar com o controlador inicial
-        pass
