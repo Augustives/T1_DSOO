@@ -8,6 +8,10 @@ class AbstractControladorQuadra(ABC):
         pass
 
     @abstractmethod
+    def inicia(self):
+        pass
+
+    @abstractmethod
     def add_quadra(self):
         pass
 
@@ -25,6 +29,10 @@ class AbstractControladorQuadra(ABC):
 
     @abstractmethod
     def listar_quadras(self):
+        pass
+
+    @abstractmethod
+    def listar_quadras_esportes(self):
         pass
 
     @abstractmethod

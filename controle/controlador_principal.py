@@ -1,4 +1,3 @@
-from controle.controlador_aluguel import ControladorAluguel
 from controle.abstract_controlador_principal import AbstractControladorPrincipal
 
 
@@ -32,7 +31,6 @@ class ControladorPrincipal(AbstractControladorPrincipal):
     def vai_controlador_quadra(self):
         self.__controlador_quadra.inicia()
 
-    @staticmethod
-    def vai_controlador_aluguel():
-        ControladorAluguel().inicia()
+    def vai_controlador_aluguel(self):
+        self.__controlador_aluguel.inicia()
 

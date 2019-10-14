@@ -28,16 +28,15 @@ class ControladorAluguel(AbstractControladorAluguel):
         funcao_escolhida = escolhas[escolha]
         funcao_escolhida()
 
-    # não tá perfeito ainda
     def add_aluguel(self):
         identificador, cpf, dia, mes, hora = self.__tela_aluguel.tela_add_aluguel()
-        #DA ONDE VEM OS CONTROLADORES ? DO ONTROLADOR PRINCIPAL ?
         quadra = self.__controlador_quadra.encontra_quadra(identificador)
         pessoa = self.__controlador_pessoa.encontra_pessoa(cpf)
         try:
             for aluguel in self.__lista_alugueis:
                 if (aluguel.quadra == quadra and
-                   aluguel.dia == dia and aluguel.mes == mes and aluguel.hora+1 > hora ):
+                        aluguel.dia == dia and
+                        aluguel.mes == mes and aluguel.hora+1 > hora):
                     raise CadastroDuplicadoException
         except CadastroDuplicadoException:
             print("Aluguel indisponível no horário desejado.")
@@ -70,7 +69,8 @@ class ControladorAluguel(AbstractControladorAluguel):
                 print(aluguel.pessoa.nome)
                 print(aluguel.pessoa.cpf)
                 print(aluguel.quadra.identificador)
-                print(aluguel.dia,"/", aluguel.mes,"/", aluguel.hora)
+                print(aluguel.dia, "/", aluguel.mes, "às",
+                      aluguel.hora, "horas")
 
     def lista_aluguel_dia(self):
         dia = self.__tela_aluguel.tela_lista_aluguel_dia()
@@ -80,21 +80,15 @@ class ControladorAluguel(AbstractControladorAluguel):
                 print(aluguel.pessoa.nome)
                 print(aluguel.pessoa.cpf)
                 print(aluguel.quadra.identificador)
-                print(aluguel.dia,"/", aluguel.mes,"às", aluguel.hora, "horas")
+                print(aluguel.dia, "/", aluguel.mes, "às",
+                      aluguel.hora, "horas")
 
     def voltar(self):
         self.__controlador_principal.inicia()
 
     def recibo(self, nome: str, cpf: str,
-                     esporte: str, dia: int,
-                     mes: int, horario: int):
+               esporte: str, dia: int,
+               mes: int, horario: int):
         self.__tela_aluguel.tela_recibo(nome, cpf, esporte, dia,
                                         mes, horario)
         self.abre_tela_aluguel()
-
-
-
-
-
-
-

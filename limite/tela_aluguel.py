@@ -14,12 +14,11 @@ class TelaAluguel(AbstractTela):
         print("2 - Remover um aluguel.")
         print("3 - Listar alugueis no mes.")
         print("4 - Listar alugueis por dia.")
-        print("5 - ")
         print("0 - Voltar")
         print("-----------------------------------------")
 
         escolha = self.le_num_inteiro("Escolha uma das opções:",
-                                      [1, 2, 3, 4, 5, 0])
+                                      [1, 2, 3, 4, 0])
         return escolha
 
     @staticmethod
@@ -51,17 +50,26 @@ class TelaAluguel(AbstractTela):
                 dia = int(input("Dia: "))
                 mes = int(input("Mes: "))
                 hora = int(input("Hora: "))
-                if (identificador <= 0 or not (dia <= 0 and dia > 31)
-                        or not (mes <= 0 and mes > 12) or not (hora < 0 and hora > 24):
+                if (identificador <= 0 or not (0 >= dia > 31)
+                        or not (0 >= mes > 12) or not (0 > hora > 24)):
                     raise ValueError
                 return identificador, dia, mes, hora
             except ValueError:
                 print("Informacoes invalidas. preencha novamente, por favor.")
 
-
+    @staticmethod
     def tela_lista_aluguel_mes():
-
-
+        print("Você escolheu visualizar os alugueis "
+              "de um determinado mês.")
+        while True:
+            try:
+                mes = int(input("Informe o dia, por favor: "))
+                if mes < 1 or mes > 12:
+                    raise ValueError
+                return mes
+            except ValueError:
+                print("Dados oferecidos inválidos. "
+                      "Preencha novamente, por favor.")
 
     @staticmethod
     def tela_recibo(nome: str, cpf: str, esporte: str,
@@ -84,4 +92,3 @@ class TelaAluguel(AbstractTela):
             except ValueError:
                 print("Dados oferecidos inválidos. "
                       "Preencha novamente, por favor.")
-
