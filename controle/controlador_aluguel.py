@@ -8,14 +8,10 @@ class ControladorAluguel(AbstractControladorAluguel):
 
     def __init__(self, controlador_principal: ControladorPrincipal):
         from limite.tela_aluguel import TelaAluguel
-        from controle.controlador_pessoa import ControladorPessoa
-        from controle.controlador_quadra import ControladorQuadra
         super().__init__()
         self.__tela_aluguel = TelaAluguel(self)
         self.__lista_alugueis = list()
         self.__controlador_principal = controlador_principal
-        self.__controlador_quadra = ControladorQuadra(controlador_principal)
-        self.__controlador_pessoa = ControladorPessoa(controlador_principal)
 
     def inicia(self):
         self.abre_tela_aluguel()
@@ -56,7 +52,7 @@ class ControladorAluguel(AbstractControladorAluguel):
 
     def remove_aluguel(self):
         identificador, dia, mes, hora = self.__tela_aluguel.tela_remove_aluguel()
-        quadra = self.__controlador_quadra.encontra_quadra(identificador)
+        quadra = self.__controlador_principal.encontra_quadra(identificador)
         for aluguel in self.__lista_alugueis:
             if (aluguel.quadra == quadra and
                     aluguel.dia == dia and aluguel.mes == mes and aluguel.hora == hora):
