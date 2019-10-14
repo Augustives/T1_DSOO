@@ -1,8 +1,9 @@
-from controle.controlador_principal import ControladorPrincipal
 from limite.abstract_tela import AbstractTela
 
 
 class TelaInicial(AbstractTela):
+    from controle.controlador_principal import ControladorPrincipal
+
     def __init__(self, controlador: ControladorPrincipal):
         super().__init__()
         self.__controlador = controlador
@@ -17,4 +18,3 @@ class TelaInicial(AbstractTela):
         escolha = self.le_num_inteiro("Escolha uma das opções:",
                                       [1, 2, 3])
         return escolha
-

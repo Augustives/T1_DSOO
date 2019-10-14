@@ -1,9 +1,12 @@
-from limite.tela_inicial import TelaInicial
 from controle.controlador_pessoa import ControladorPessoa
+from controle.controlador_aluguel import ControladorAluguel
+from controle.abstract_controlador_principal import AbstractControladorPrincipal
 
 
-class ControladorPrincipal:
+class ControladorPrincipal(AbstractControladorPrincipal):
     def __init__(self):
+        from limite.tela_inicial import TelaInicial
+        super().__init__()
         self.__tela_inicial = TelaInicial(self)
 
     def inicia(self):
@@ -20,7 +23,7 @@ class ControladorPrincipal:
 
     @staticmethod
     def vai_controlador_pessoa():
-        ControladorPessoa.inicia()
+        ControladorPessoa().inicia()
 
     @staticmethod
     def vai_controlador_quadra():
@@ -28,7 +31,8 @@ class ControladorPrincipal:
 
     @staticmethod
     def vai_controlador_aluguel():
-        pass
+        ControladorAluguel().inicia()
+
 
 
 

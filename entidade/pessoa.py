@@ -1,5 +1,9 @@
-class Pessoa:
-    def __init__(self, nome: str, cpf: int, telefone: int, email: str):
+from entidade.abstract_pessoa import AbstractPessoa
+
+
+class Pessoa(AbstractPessoa):
+    def __init__(self, nome: str, cpf: str, telefone: int, email: str):
+        super().__init__()
         self.__nome = nome
         self.__cpf = cpf
         self.__telefone = telefone
@@ -31,7 +35,7 @@ class Pessoa:
 
     @property
     def email(self):
-        return self.__nome
+        return self.__email
 
     @email.setter
     def email(self, email):

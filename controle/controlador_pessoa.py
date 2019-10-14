@@ -1,11 +1,12 @@
 from entidade.pessoa import Pessoa
-from entidade.pessoa_duplicada_exception import PessoaDuplicadaException
-from limite.tela_pessoa import TelaPessoa
-from controle.controlador_principal import ControladorPrincipal
+from entidade.cadastro_duplicado_exception import CadastroDuplicadoException
+from controle.abstract_controlador_pessoa import AbstractControladorPessoa
 
 
-class ControladorPessoa:
+class ControladorPessoa(AbstractControladorPessoa):
     def __init__(self):
+        from limite.tela_pessoa import TelaPessoa
+        super().__init__()
         self.__tela_pessoa = TelaPessoa(self)
         self.__lista_pessoas = list()
 
@@ -17,8 +18,8 @@ class ControladorPessoa:
         try:
             for pessoa in self.__lista_pessoas:
                 if pessoa.cpf == cpf:
-                    raise PessoaDuplicadaException
-        except PessoaDuplicadaException:
+                    raise CadastroDuplicadoException
+        except CadastroDuplicadoException:
             print("Pessoa já cadastrada.")
             self.abre_tela_pessoa()
 
@@ -65,6 +66,7 @@ class ControladorPessoa:
         cpf = self.__tela_pessoa.tela_encontrar_pessoa()
         for pessoa in self.__lista_pessoas:
             if pessoa.cpf == cpf:
+                print("-" * 30)
                 print("DADOS DO USUÁRIO:\n "
                       "CPF: {}\n "
                       "Nome: {}\n "
@@ -84,7 +86,8 @@ class ControladorPessoa:
 
     @staticmethod
     def voltar():
-        ControladorPrincipal.inicia()
+        from controle.controlador_principal import ControladorPrincipal
+        ControladorPrincipal().inicia()
 
     def abre_tela_pessoa(self):
         escolhas = {1: self.add_pessoa, 2: self.remove_pessoa,
