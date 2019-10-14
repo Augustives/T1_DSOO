@@ -50,7 +50,7 @@ class TelaAluguel(AbstractTela):
                 dia = int(input("Dia: "))
                 mes = int(input("Mes: "))
                 hora = int(input("Hora: "))
-                if (identificador <= 0 or not (0 >= dia > 31)
+                if ((identificador <= 0) or not (0 >= dia > 31)
                         or not (0 >= mes > 12) or not (0 > hora > 24)):
                     raise ValueError
                 return identificador, dia, mes, hora

@@ -3,7 +3,6 @@ from entidade.quadra import Quadra
 from entidade.pessoa import Pessoa
 
 
-
 class Aluguel(AbstractAluguel):
     def __init__(self, pessoa: Pessoa, quadra: Quadra, dia: int, mes: int, hora: int):
         super().__init__()
@@ -27,7 +26,7 @@ class Aluguel(AbstractAluguel):
 
     @property
     def mes(self):
-        return mes
+        return self.__mes
 
     @property
     def hora(self):

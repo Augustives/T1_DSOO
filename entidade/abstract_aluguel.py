@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-# https://stackabuse.com/converting-strings-to-datetime-in-python/
 
 
 class AbstractAluguel(ABC):
@@ -19,10 +18,15 @@ class AbstractAluguel(ABC):
 
     @property
     @abstractmethod
-    def data_str(self):
+    def dia(self):
         pass
 
     @property
     @abstractmethod
-    def data_date(self):
+    def mes(self):
+        pass
+
+    @property
+    @abstractmethod
+    def hora(self):
         pass
