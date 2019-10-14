@@ -76,8 +76,8 @@ class TelaQuadra(AbstractTela):
             print(quadra.identificador)
 
     def tela_listar_quadras_esporte(self):
-        print("Você escolheu visualizar todas as quadras casdastrada com esse esporte.")
         esporte = str(input("Por favor, informe o esporte desejado: "))
+        print("Você escolheu visualizar todas as quadras casdastrada com esse esporte.")
         for quadra in self.__controlador.lista_quadras:
             if quadra.esporte == esporte:
                 print("-" * 30)

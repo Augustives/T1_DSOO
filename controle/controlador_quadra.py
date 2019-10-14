@@ -61,6 +61,10 @@ class ControladorQuadra(AbstractControladorQuadra):
         self.__tela_quadra.tela_listar_quadras()
         self.abre_tela_quadra()
 
+    def listar_quadras_esporte(self):
+        self.__tela_quadra.tela_listar_quadras_esporte()
+        self.abre_tela_quadra()
+
     @staticmethod
     def voltar():
         from controle.controlador_principal import ControladorPrincipal
@@ -69,7 +73,7 @@ class ControladorQuadra(AbstractControladorQuadra):
     def abre_tela_quadra(self):
         escolhas = {1: self.add_quadra, 2: self.remove_quadra,
                     3: self.edit_quadra, 4: self.listar_quadras,
-                    5: self.listar_quadras, 0: self.voltar}
+                    5: self.listar_quadras_esporte, 0: self.voltar}
         escolha = self.__tela_quadra.mostra_opcoes()
         funcao_escolhida = escolhas[escolha]
         funcao_escolhida()
