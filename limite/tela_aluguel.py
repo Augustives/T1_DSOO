@@ -33,10 +33,10 @@ class TelaAluguel(AbstractTela):
                 dia = int(input("Dia: "))
                 mes = int(input("Mes: "))
                 hora = int(input("Hora: "))
-                if (identificador <= 0 or (0 >= dia > 31) or
-                        len(cpf) != 11 or not cpf.isdigit() or (0 >= mes > 12) or (0 > hora > 24)):
+                if (identificador <= 0 or not (0 >= dia > 31) or
+                        len(cpf) != 11 or not cpf.isdigit() or not (0 >= mes > 12) or not(0 > hora > 24)):
                     raise ValueError
-                return identificador, cpf, mes, dia, hora
+                return identificador, cpf, dia, mes, hora
             except ValueError:
                 print("Dados oferecidos inválidos. "
                       "Preencha novamente, por favor.")
@@ -47,15 +47,21 @@ class TelaAluguel(AbstractTela):
               "Informe o Identificador da quadra, o dia, o mes e o horario, por favor.")
         while True:
             try:
-                cpf = str(input("CPF: "))
-                if len(cpf) != 11 or not cpf.isdigit():
+                identificador = int(input("Identificador da Quadra: "))
+                dia = int(input("Dia: "))
+                mes = int(input("Mes: "))
+                hora = int(input("Hora: "))
+                if (identificador <= 0 or not (dia <= 0 and dia > 31)
+                        or not (mes <= 0 and mes > 12) or not (hora < 0 and hora > 24):
                     raise ValueError
-                return cpf
+                return identificador, dia, mes, hora
             except ValueError:
-                print("CPF inválido. preencha novamente, por favor.")
+                print("Informacoes invalidas. preencha novamente, por favor.")
 
-    def tela_lista_aluguel_mes(self):
-        pass
+
+    def tela_lista_aluguel_mes():
+
+
 
     @staticmethod
     def tela_recibo(nome: str, cpf: str, esporte: str,

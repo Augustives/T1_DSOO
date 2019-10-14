@@ -24,7 +24,7 @@ class ControladorAluguel(AbstractControladorAluguel):
         escolhas = {1: self.add_aluguel, 2: self.remove_aluguel,
                     3: self.lista_aluguel_mes, 4: self.lista_aluguel_dia,
                     0: self.voltar}  # precisa colocar as escolhas
-        escolha = self.__tela_aluguel.mostra_opcoes()+
+        escolha = self.__tela_aluguel.mostra_opcoes()
         funcao_escolhida = escolhas[escolha]
         funcao_escolhida()
 
@@ -52,6 +52,7 @@ class ControladorAluguel(AbstractControladorAluguel):
 
     def remove_aluguel(self):
         identificador, dia, mes, hora = self.__tela_aluguel.tela_remove_aluguel()
+        quadra = self.__controlador_quadra.encontra_quadra(identificador)
         for aluguel in self.__lista_alugueis:
             if (aluguel.quadra == quadra and
                     aluguel.dia == dia and aluguel.mes == mes and aluguel.hora == hora):
