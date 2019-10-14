@@ -3,16 +3,19 @@ from entidade.aluguel import Aluguel
 from entidade.cadastro_duplicado_exception import CadastroDuplicadoException
 
 
-
 class ControladorAluguel(AbstractControladorAluguel):
     from controle.controlador_principal import ControladorPrincipal
 
     def __init__(self, controlador_principal: ControladorPrincipal):
         from limite.tela_aluguel import TelaAluguel
+        from controle.controlador_pessoa import ControladorPessoa
+        from controle.controlador_quadra import ControladorQuadra
         super().__init__()
         self.__tela_aluguel = TelaAluguel(self)
         self.__lista_alugueis = list()
         self.__controlador_principal = controlador_principal
+        self.__controlador_quadra = ControladorQuadra(self)
+        self.__controlador_pessoa = ControladorPessoa(self)
 
     def inicia(self):
         self.abre_tela_aluguel()
@@ -29,8 +32,8 @@ class ControladorAluguel(AbstractControladorAluguel):
     def add_aluguel(self):
         identificador, cpf, dia, mes, hora = self.__tela_aluguel.tela_add_aluguel()
         #DA ONDE VEM OS CONTROLADORES ? DO ONTROLADOR PRINCIPAL ?
-        quadra = controlador_quadra.mostra_quadra(identificador)
-        pessoa = controlador_pessoa.mostra_pessoa(cpf)
+        quadra = self.__controlador_quadra.encontra_quadra(identificador)
+        pessoa = self.__controlador_pessoa.encontra_pessoa(cpf)
         try:
             for aluguel in self.__lista_alugueis:
                 if (aluguel.quadra == quadra and
