@@ -6,6 +6,7 @@ class TelaQuadra(AbstractTela):
         super().__init__()
         self.__controlador = controlador
         self.__lista_identificador = self.__controlador.lista_identificador()
+
     def mostra_opcoes(self):
         print("---------- CADASTRO DE QUADRAS ----------")
         print("1 - Cadastrar quadra")
@@ -28,9 +29,10 @@ class TelaQuadra(AbstractTela):
             try:
                 esporte = str(input("Esporte: "))
                 tipo = str(input("Tipo: "))
-                if esporte == "" or tipo == "":
+                identificador = int(input("Identificador: "))
+                if esporte == "" or tipo == "" or identificador <= 0:
                     raise ValueError
-                return esporte, tipo
+                return esporte, tipo, identificador
             except ValueError:
                 print("Dados oferecidos inválidos. "
                       "Preencha novamente, por favor.")
