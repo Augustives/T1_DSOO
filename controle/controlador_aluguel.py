@@ -50,7 +50,7 @@ class ControladorAluguel(AbstractControladorAluguel):
 
     def remove_aluguel(self):
         identificador, dia, mes, hora = self.__tela_aluguel.tela_remove_aluguel()
-        quadra = controlador_quadra.encontra_quadra(identificador)
+        quadra = self.__controlador_quadra.encontra_quadra(identificador)
         for aluguel in self.__lista_alugueis:
             if (aluguel.quadra == quadra and
                     aluguel.dia == dia and aluguel.mes == mes and aluguel.hora == hora):
