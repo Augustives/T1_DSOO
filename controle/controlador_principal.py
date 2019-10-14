@@ -33,3 +33,9 @@ class ControladorPrincipal(AbstractControladorPrincipal):
 
     def vai_controlador_aluguel(self):
         self.__controlador_aluguel.inicia()
+
+    def encontra_pessoa(self, cpf):
+        self.__controlador_pessoa.encontra_pessoa(cpf)
+
+    def encontra_quadra(self, identificador):
+        self.__controlador_quadra.encontra_quadra(identificador)

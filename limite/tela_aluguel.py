@@ -32,8 +32,9 @@ class TelaAluguel(AbstractTela):
                 dia = int(input("Dia: "))
                 mes = int(input("Mes: "))
                 hora = int(input("Hora: "))
-                if (identificador <= 0 or not (0 >= dia > 31) or
-                        len(cpf) != 11 or not cpf.isdigit() or not (0 >= mes > 12) or not(0 > hora > 24)):
+                if (identificador <= 0 or dia > 31 or dia < 1 or
+                        len(cpf) != 11 or not cpf.isdigit() or
+                        mes > 12 or mes < 1 or hora > 24 or hora < 0):
                     raise ValueError
                 return identificador, cpf, dia, mes, hora
             except ValueError:

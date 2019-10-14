@@ -14,8 +14,8 @@ class ControladorAluguel(AbstractControladorAluguel):
         self.__tela_aluguel = TelaAluguel(self)
         self.__lista_alugueis = list()
         self.__controlador_principal = controlador_principal
-        self.__controlador_quadra = ControladorQuadra(self)
-        self.__controlador_pessoa = ControladorPessoa(self)
+        self.__controlador_quadra = ControladorQuadra(controlador_principal)
+        self.__controlador_pessoa = ControladorPessoa(controlador_principal)
 
     def inicia(self):
         self.abre_tela_aluguel()
@@ -23,16 +23,18 @@ class ControladorAluguel(AbstractControladorAluguel):
     def abre_tela_aluguel(self):
         escolhas = {1: self.add_aluguel, 2: self.remove_aluguel,
                     3: self.lista_aluguel_mes, 4: self.lista_aluguel_dia,
-                    0: self.voltar}  # precisa colocar as escolhas
+                    0: self.voltar}
         escolha = self.__tela_aluguel.mostra_opcoes()
         funcao_escolhida = escolhas[escolha]
         funcao_escolhida()
 
     def add_aluguel(self):
         identificador, cpf, dia, mes, hora = self.__tela_aluguel.tela_add_aluguel()
-        quadra = self.__controlador_quadra.encontra_quadra(identificador)
-        pessoa = self.__controlador_pessoa.encontra_pessoa(cpf)
         try:
+            quadra = self.__controlador_principal.encontra_quadra(identificador)
+            pessoa = self.__controlador_principal.encontra_pessoa(cpf)
+            if quadra is None or pessoa is None:
+                raise ValueError
             for aluguel in self.__lista_alugueis:
                 if (aluguel.quadra == quadra and
                         aluguel.dia == dia and
@@ -40,6 +42,9 @@ class ControladorAluguel(AbstractControladorAluguel):
                     raise CadastroDuplicadoException
         except CadastroDuplicadoException:
             print("Aluguel indisponível no horário desejado.")
+            self.abre_tela_aluguel()
+        except ValueError:
+            print("Quadra ou pessoa inexistentes.")
             self.abre_tela_aluguel()
 
         aluguel_marcado = Aluguel(pessoa, quadra, dia, mes, hora)
