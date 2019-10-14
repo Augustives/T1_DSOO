@@ -48,7 +48,7 @@ class ControladorQuadra(AbstractControladorQuadra):
                     quadra.tipo = tipo
                 print("INFORMAÇÕES ATUALIZADAS:\n "
                       "Esporte: {}\n "
-                      "Tipo: {}"
+                      "Tipo: {}\n"
                       "Identificador: {}".format(quadra.esporte, quadra.tipo,
                                                  quadra.identificador))
                 self.abre_tela_quadra()
