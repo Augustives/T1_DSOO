@@ -1,15 +1,14 @@
-from Controle.abstract_controlador_quadra import AbstractControladorQuadra
-from Entidade.quadra import Quadra
-from Entidade.cadastro_duplicado_exception import CadastroDuplicadoException
+from controle.abstract_controlador_quadra import AbstractControladorQuadra
+from entidade.quadra import Quadra
+from entidade.cadastro_duplicado_exception import CadastroDuplicadoException
 
 
 class ControladorQuadra(AbstractControladorQuadra):
     def __init__(self):
-        from Limite.tela_quadra import TelaQuadra
+        from limite.tela_quadra import TelaQuadra
         super().__init__()
         self.__tela_quadra = TelaQuadra(self)
         self.__lista_quadras = []
-
 
     def inicia(self):
         self.abre_tela_quadra()
@@ -48,7 +47,7 @@ class ControladorQuadra(AbstractControladorQuadra):
                       "Esporte: {}\n "
                       "Tipo: {}"
                       "Identificador: {}".format(quadra.esporte, quadra.tipo,
-                                         quadra.identificador))
+                                                 quadra.identificador))
                 self.abre_tela_quadra()
         print("Quadra inexistente.")
         self.abre_tela_quadra()
@@ -63,7 +62,7 @@ class ControladorQuadra(AbstractControladorQuadra):
 
     @staticmethod
     def voltar():
-        from Controle.controlador_principal import ControladorPrincipal
+        from controle.controlador_principal import ControladorPrincipal
         ControladorPrincipal().inicia()
 
     def abre_tela_quadra(self):
