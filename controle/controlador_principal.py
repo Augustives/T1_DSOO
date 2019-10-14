@@ -33,4 +33,3 @@ class ControladorPrincipal(AbstractControladorPrincipal):
 
     def vai_controlador_aluguel(self):
         self.__controlador_aluguel.inicia()
-

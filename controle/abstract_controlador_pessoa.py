@@ -23,7 +23,7 @@ class AbstractControladorPessoa(ABC):
         pass
 
     @abstractmethod
-    def encontrar_pessoa(self):
+    def dados_pessoa(self):
         pass
 
     @abstractmethod
@@ -35,5 +35,13 @@ class AbstractControladorPessoa(ABC):
         pass
 
     @abstractmethod
+    def voltar(self):
+        pass
+
+    @abstractmethod
     def abre_tela_pessoa(self):
+        pass
+
+    @abstractmethod
+    def encontra_pessoa(self, cpf):
         pass

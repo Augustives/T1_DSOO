@@ -4,9 +4,11 @@ from abc import ABC, abstractmethod
 class AbstractControladorAluguel(ABC):
     @abstractmethod
     def __init__(self):
-        self.__dict_aluguel = {}
         pass
-#Lista de dicionarios separados por mes ?
+
+    @abstractmethod
+    def inicia(self):
+        pass
 
     @abstractmethod
     def add_aluguel(self):
@@ -21,21 +23,19 @@ class AbstractControladorAluguel(ABC):
         pass
 
     @abstractmethod
-    def lista_quadras_disponiveis_dia(self):
-        pass
-
-    @abstractmethod
-    def lista_aluguel_data(self):
-        pass
-
-    @abstractmethod
-    def lista_aluguel_pessoa(self):
-        pass
-
-    @abstractmethod
-    def quadra_mais_alugada(self):
+    def lista_aluguel_dia(self):
         pass
 
     @abstractmethod
     def abre_tela_aluguel(self):
+        pass
+
+    @abstractmethod
+    def recibo(self, nome: str, cpf: str,
+               esporte: str, dia: int,
+               mes: int, horario: int):
+        pass
+
+    @abstractmethod
+    def voltar(self):
         pass

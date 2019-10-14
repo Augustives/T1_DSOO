@@ -23,6 +23,7 @@ class AbstractControladorQuadra(ABC):
     def edit_quadra(self):
         pass
 
+    @property
     @abstractmethod
     def lista_quadras(self):
         pass
@@ -32,7 +33,7 @@ class AbstractControladorQuadra(ABC):
         pass
 
     @abstractmethod
-    def listar_quadras_esportes(self):
+    def listar_quadras_esporte(self):
         pass
 
     @abstractmethod
@@ -43,3 +44,6 @@ class AbstractControladorQuadra(ABC):
     def voltar(self):
         pass
 
+    @abstractmethod
+    def encontra_quadra(self, identificador):
+        pass

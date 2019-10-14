@@ -13,3 +13,15 @@ class AbstractControladorPrincipal(ABC):
     @abstractmethod
     def inicia(self):
         pass
+
+    @abstractmethod
+    def vai_controlador_pessoa(self):
+        pass
+
+    @abstractmethod
+    def vai_controlador_quadra(self):
+        pass
+
+    @abstractmethod
+    def vai_controlador_aluguel(self):
+        pass
