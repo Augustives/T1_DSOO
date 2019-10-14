@@ -78,7 +78,7 @@ class ControladorQuadra(AbstractControladorQuadra):
         funcao_escolhida = escolhas[escolha]
         funcao_escolhida()
 
-    def mostra_quadra(self, identificador):
+    def encontra_quadra(self, identificador):
         for quadra in self.__lista_quadras:
             if quadra.identificador == identificador:
                 return quadra

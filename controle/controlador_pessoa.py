@@ -65,8 +65,8 @@ class ControladorPessoa(AbstractControladorPessoa):
         print("Usuário inexistente.")
         self.abre_tela_pessoa()
 
-    def encontrar_pessoa(self):
-        cpf = self.__tela_pessoa.tela_encontrar_pessoa()
+    def dados_pessoa(self):
+        cpf = self.__tela_pessoa.tela_dados_pessoa()
         for pessoa in self.__lista_pessoas:
             if pessoa.cpf == cpf:
                 print("-" * 30)
@@ -93,12 +93,12 @@ class ControladorPessoa(AbstractControladorPessoa):
     def abre_tela_pessoa(self):
         escolhas = {1: self.add_pessoa, 2: self.remove_pessoa,
                     3: self.edit_pessoa, 4: self.listar_pessoas,
-                    5: self.encontrar_pessoa, 0: self.voltar}
+                    5: self.dados_pessoa, 0: self.voltar}
         escolha = self.__tela_pessoa.mostra_opcoes()
         funcao_escolhida = escolhas[escolha]
         funcao_escolhida()
 
-    def mostra_pessoa(self, cpf):
+    def encontra_pessoa(self, cpf):
         for pessoa in self.__lista_pessoas:
             if pessoa.cpf == cpf:
                 return pessoa

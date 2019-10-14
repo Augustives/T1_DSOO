@@ -81,7 +81,7 @@ class TelaPessoa(AbstractTela):
             print(pessoa.email)
 
     @staticmethod
-    def tela_encontrar_pessoa():
+    def tela_dados_pessoa():
         print("Você escolheu encontrar um usuário cadastrado.")
         try:
             cpf = str(input("Por favor, informe o CPF do usuário desejado."))
