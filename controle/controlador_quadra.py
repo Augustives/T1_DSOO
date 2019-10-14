@@ -1,5 +1,7 @@
 from Controle.abstract_controlador_quadra import AbstractControladorQuadra
 from Entidade.quadra import Quadra
+from Entidade.cadastro_duplicado_exception import CadastroDuplicadoException
+
 
 class ControladorQuadra(AbstractControladorQuadra):
     def __init__(self):
@@ -7,31 +9,32 @@ class ControladorQuadra(AbstractControladorQuadra):
         super().__init__()
         self.__tela_quadra = TelaQuadra(self)
         self.__lista_quadras = []
-        self.__identificador = 0
-        self.__lista_identificador = []
 
-    @property
-    def lista_identificador(self):
-        return self.__lista_identificador
 
     def inicia(self):
         self.abre_tela_quadra()
 
     def add_quadra(self):
-        esporte, tipo = self.__tela_quadra.tela_add_quadra()
-        self.__identificador += 1
-        self.__lista_identificador.append(self.__identificador)
-        identificador = self.__identificador
-        identificador = Quadra(esporte, tipo, identificador)
-        self.__lista_quadras.append(identificador)
-        print("Usuário cadastrado com sucesso.")
+        esporte, tipo, identificador = self.__tela_quadra.tela_add_quadra()
+        try:
+            for quadra in self.__lista_quadras:
+                if quadra.identificador == identificador:
+                    raise CadastroDuplicadoException
+        except CadastroDuplicadoException:
+            print("Quadra já cadastrada.")
+            self.abre_tela_quadra()
+
+        quadra_nova = Quadra(esporte, tipo, identificador)
+        self.__lista_quadras.append(quadra_nova)
+        print("Quadra cadastrada com sucesso.")
         self.abre_tela_quadra()
 
     def remove_quadra(self):
         identificador = self.__tela_quadra.tela_remove_quadra()
-        if identificador in self.__lista_quadras:
-            self.lista_quadras().remove(identificador)
-
+        for quadra in self.__lista_quadras:
+            if identificador == quadra.identificador:
+                self.lista_quadras.remove(quadra)
+        self.abre_tela_quadra()
 
     def edit_quadra(self):
         esporte, tipo, identificador = self.__tela_quadra.tela_edit_quadra()
