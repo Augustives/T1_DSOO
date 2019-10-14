@@ -7,10 +7,12 @@ class ControladorPrincipal(AbstractControladorPrincipal):
         from limite.tela_inicial import TelaInicial
         from controle.controlador_pessoa import ControladorPessoa
         from controle.controlador_quadra import ControladorQuadra
+        from controle.controlador_aluguel import ControladorAluguel
         super().__init__()
         self.__tela_inicial = TelaInicial(self)
         self.__controlador_pessoa = ControladorPessoa(self)
         self.__controlador_quadra = ControladorQuadra(self)
+        self.__controlador_aluguel = ControladorAluguel(self)
 
     def inicia(self):
         self.abre_tela_inicial()
