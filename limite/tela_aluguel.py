@@ -36,7 +36,7 @@ class TelaAluguel(AbstractTela):
                 if (identificador <= 0 or (dia<= 0 and dia > 31) or
                         len(cpf) != 11 or not cpf.isdigit() or (mes <=0 and mes > 12) or (hora < 0 and hora > 24):
                     raise ValueError
-                return identificador, cpf, mes, dia, hora
+                return identificador, cpf, dia, mes, hora
             except ValueError:
                 print("Dados oferecidos inválidos. "
                       "Preencha novamente, por favor.")

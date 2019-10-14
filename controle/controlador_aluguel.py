@@ -29,8 +29,8 @@ class ControladorAluguel(AbstractControladorAluguel):
     def add_aluguel(self):
         identificador, cpf, dia, mes, hora = self.__tela_aluguel.tela_add_aluguel()
         #DA ONDE VEM OS CONTROLADORES ? DO ONTROLADOR PRINCIPAL ?
-        quadra = controlador_quadra.mostra_quadra(identificador)
-        pessoa = controlador_pessoa.mostra_pessoa(cpf)
+        quadra = controlador_quadra.encontra_quadra(identificador)
+        pessoa = controlador_pessoa.encontra_pessoa(cpf)
         try:
             for aluguel in self.__lista_alugueis:
                 if (aluguel.quadra == quadra and
@@ -47,6 +47,7 @@ class ControladorAluguel(AbstractControladorAluguel):
 
     def remove_aluguel(self):
         identificador, dia, mes, hora = self.__tela_aluguel.tela_remove_aluguel()
+        quadra = controlador_quadra.encontra_quadra(identificador)
         for aluguel in self.__lista_alugueis:
             if (aluguel.quadra == quadra and
                     aluguel.dia == dia and aluguel.mes == mes and aluguel.hora == hora):
