@@ -1,11 +1,12 @@
-from controle.controlador_pessoa import ControladorPessoa
-from controle.controlador_aluguel import ControladorAluguel
-from controle.abstract_controlador_principal import AbstractControladorPrincipal
+from Controle.controlador_pessoa import ControladorPessoa
+from Controle.controlador_aluguel import ControladorAluguel
+from Controle.controlador_quadra import ControladorQuadra
+from Controle.abstract_controlador_principal import AbstractControladorPrincipal
 
 
 class ControladorPrincipal(AbstractControladorPrincipal):
     def __init__(self):
-        from limite.tela_inicial import TelaInicial
+        from Limite.tela_inicial import TelaInicial
         super().__init__()
         self.__tela_inicial = TelaInicial(self)
 
@@ -27,7 +28,7 @@ class ControladorPrincipal(AbstractControladorPrincipal):
 
     @staticmethod
     def vai_controlador_quadra():
-        pass
+        ControladorQuadra().inicia()
 
     @staticmethod
     def vai_controlador_aluguel():
