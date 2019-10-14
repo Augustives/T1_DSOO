@@ -1,49 +1,54 @@
 from controle.abstract_controlador_aluguel import AbstractControladorAluguel
 from entidade.aluguel import Aluguel
 from entidade.cadastro_duplicado_exception import CadastroDuplicadoException
-from datetime import datetime
+
 
 
 class ControladorAluguel(AbstractControladorAluguel):
-    def __init__(self):
+    from controle.controlador_principal import ControladorPrincipal
+
+    def __init__(self, controlador_principal: ControladorPrincipal):
         from limite.tela_aluguel import TelaAluguel
         super().__init__()
         self.__tela_aluguel = TelaAluguel(self)
         self.__lista_alugueis = list()
+        self.__controlador_principal = controlador_principal
 
     def inicia(self):
         self.abre_tela_aluguel()
 
     def abre_tela_aluguel(self):
-        escolhas = {}  # precisa colocar as escolhas
-        escolha = self.__tela_aluguel.mostra_opcoes()
+        escolhas = {1: self.add_aluguel, 2: self.remove_aluguel,
+                    3: self.lista_aluguel_mes, 4: self.lista_aluguel_dia,
+                    0: self.voltar}  # precisa colocar as escolhas
+        escolha = self.__tela_aluguel.mostra_opcoes()+
         funcao_escolhida = escolhas[escolha]
         funcao_escolhida()
 
     # não tá perfeito ainda
     def add_aluguel(self):
-        pessoa, quadra, data_str = self.__tela_aluguel.tela_add_aluguel()
-        data_date = datetime.strptime(data_str, "%d/%m/%Y %H:%M")
+        identificador, cpf, dia, mes, hora = self.__tela_aluguel.tela_add_aluguel()
+
+
         try:
             for aluguel in self.__lista_alugueis:
                 if (aluguel.quadra == quadra and
-                   aluguel.data_horario == data_date):
+                   aluguel.dia == dia and aluguel.mes == mes and aluguel.hora+1 > hora ):
                     raise CadastroDuplicadoException
         except CadastroDuplicadoException:
-            print("Quadra indisponível no horário desejado.")
+            print("Aluguel indisponível no horário desejado.")
             self.abre_tela_aluguel()
 
-        aluguel_marcado = Aluguel(pessoa, quadra, data_str)
+        aluguel_marcado = Aluguel(pessoa, quadra, dia, mes, hora)
         self.__lista_alugueis.append(aluguel_marcado)
-        print("Usuário cadastrado com sucesso.")
+        print("Aluguel cadastrado com sucesso.")
         self.abre_tela_aluguel()
 
     def remove_aluguel(self):
-        quadra, data_str = self.__tela_aluguel.tela_remove_aluguel()
-        data_date = datetime.strptime(data_str, "%d/%m/%Y %H:%M")
+        quadra, dia, mes, hora = self.__tela_aluguel.tela_remove_aluguel()
         for aluguel in self.__lista_alugueis:
             if (aluguel.quadra == quadra and
-                    aluguel.data_horario == data_date):
+                    aluguel.dia == dia and aluguel.mes == mes and aluguel.hora == hora):
                 self.__lista_alugueis.remove(aluguel)
                 print("Aluguel cancelado com sucesso.")
                 self.abre_tela_aluguel()
@@ -53,15 +58,25 @@ class ControladorAluguel(AbstractControladorAluguel):
     def lista_aluguel_mes(self):
         mes = self.__tela_aluguel.tela_lista_aluguel_mes()
         for aluguel in self.__lista_alugueis:
-            if aluguel.data_horario.month == mes:
+            if aluguel.mes == mes:
                 print("-"*30)
-                print(aluguel.pessoa)
-                print(aluguel.quadra)
-                print(aluguel.data_horario)
+                print(aluguel.pessoa.nome)
+                print(aluguel.pessoa.cpf)
+                print(aluguel.quadra.identificador)
+                print(aluguel.dia,"/", aluguel.mes,"/", aluguel.hora)
 
-    def lista_aluguel_pessoa(self):
-        pass
+    def lista_aluguel_dia(self):
+        dia = self.__tela_aluguel.tela_lista_aluguel_dia()
+        for aluguel in self.__lista_alugueis:
+            if aluguel.dia == dia:
+                print("-"*30)
+                print(aluguel.pessoa.nome)
+                print(aluguel.pessoa.cpf)
+                print(aluguel.quadra.identificador)
+                print(aluguel.dia,"/", aluguel.mes,"/", aluguel.hora)
 
+    def voltar(self):
+        self.__controlador_principal.inicia()
 
 
 

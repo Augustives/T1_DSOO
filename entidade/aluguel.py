@@ -1,15 +1,17 @@
 from entidade.abstract_aluguel import AbstractAluguel
 from entidade.quadra import Quadra
 from entidade.pessoa import Pessoa
-from datetime import datetime
+
 
 
 class Aluguel(AbstractAluguel):
-    def __init__(self, pessoa: Pessoa, quadra: Quadra, data_str: str):
+    def __init__(self, pessoa: Pessoa, quadra: Quadra, dia: int, mes: int, hora: int):
         super().__init__()
         self.__pessoa = pessoa
         self.__quadra = quadra
-        self.__data_horario = datetime.strptime(data_str, '%d/%m/%Y %H:%M')
+        self.__dia = dia
+        self.__mes = mes
+        self.__hora = hora
 
     @property
     def pessoa(self):
@@ -20,5 +22,13 @@ class Aluguel(AbstractAluguel):
         return self.__quadra
 
     @property
-    def data_horario(self):
-        return self.__data_horario
+    def dia(self):
+        return self.__dia
+
+    @property
+    def mes(self):
+        return mes
+
+    @property
+    def hora(self):
+        return self.__hora
