@@ -5,7 +5,6 @@ class TelaQuadra(AbstractTela):
     def __init__(self, controlador: ControladorQuadra):
         super().__init__()
         self.__controlador = controlador
-        self.__lista_identificador = self.__controlador.lista_identificador()
 
     def mostra_opcoes(self):
         print("---------- CADASTRO DE QUADRAS ----------")
@@ -44,7 +43,7 @@ class TelaQuadra(AbstractTela):
         while True:
             try:
                 identificador = int(input("Identificador: "))
-                if identificador not in self.__lista_identificador():
+                if identificador <= 0:
                     raise ValueError
                 return identificador
             except ValueError:
@@ -56,7 +55,7 @@ class TelaQuadra(AbstractTela):
         while True:
             try:
                 identificador = int(input("Por favor, informe o Identificador da quadra desejada: "))
-                if identificador not in self.__lista_identificador():
+                if identificador <= 0:
                     raise ValueError
                 print("Por favor, forneça os dados atualizados da quadra.\n"
                       "Caso queira manter os dados atuais, "
@@ -78,6 +77,7 @@ class TelaQuadra(AbstractTela):
 
     def tela_listar_quadras_esporte(self, esporte):
         print("Você escolheu visualizar todas as quadras casdastrada com esse esporte.")
+        str(input("Por favor, informe o esporte desejado: "))
         for quadra in self.__controlador.lista_quadras:
             if quadra.esporte == esporte:
                 print("-" * 30)
