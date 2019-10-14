@@ -46,6 +46,8 @@ class ControladorAluguel(AbstractControladorAluguel):
         aluguel_marcado = Aluguel(pessoa, quadra, dia, mes, hora)
         self.__lista_alugueis.append(aluguel_marcado)
         print("Aluguel cadastrado com sucesso.")
+        self.recibo(pessoa.nome, pessoa.cpf,
+                    quadra.esporte, dia, mes, hora)
         self.abre_tela_aluguel()
 
     def remove_aluguel(self):
@@ -77,10 +79,20 @@ class ControladorAluguel(AbstractControladorAluguel):
                 print(aluguel.pessoa.nome)
                 print(aluguel.pessoa.cpf)
                 print(aluguel.quadra.identificador)
-                print(aluguel.dia,"/", aluguel.mes,"/", aluguel.hora)
+                print(aluguel.dia,"/", aluguel.mes,"às", aluguel.hora, "horas")
 
     def voltar(self):
         self.__controlador_principal.inicia()
+
+    def recibo(self, nome: str, cpf: str,
+                     esporte: str, dia: int,
+                     mes: int, horario: int):
+        self.__tela_aluguel.tela_recibo(nome, cpf, esporte, dia,
+                                        mes, horario)
+        self.abre_tela_aluguel()
+
+
+
 
 
 

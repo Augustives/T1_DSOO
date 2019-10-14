@@ -57,3 +57,25 @@ class TelaAluguel(AbstractTela):
     def tela_lista_aluguel_mes(self):
         pass
 
+    @staticmethod
+    def tela_recibo(nome: str, cpf: str, esporte: str,
+                    dia: int, mes: int, horario: int):
+        print('-'*35)
+        print("Quadra de {}".format(esporte))
+        print("alugada por {} inscrita no CPF {}".format(nome, cpf))
+        print("para o dia {}/{} às {} horas.".format(dia, mes, horario))
+
+    @staticmethod
+    def tela_lista_aluguel_dia():
+        print("Você escolheu visualizar os alugueis "
+              "de um determinado dia.")
+        while True:
+            try:
+                dia = int(input("Informe o dia, por favor: "))
+                if dia < 1 or dia > 31:
+                    raise ValueError
+                return dia
+            except ValueError:
+                print("Dados oferecidos inválidos. "
+                      "Preencha novamente, por favor.")
+
