@@ -47,13 +47,19 @@ class TelaAluguel(AbstractTela):
               "Informe o Identificador da quadra, o dia, o mes e o horario, por favor.")
         while True:
             try:
-                cpf = str(input("CPF: "))
-                if len(cpf) != 11 or not cpf.isdigit():
+                identificador = int(input("Identificador da Quadra: "))
+                dia = int(input("Dia: "))
+                mes = int(input("Mes: "))
+                hora = int(input("Hora: "))
+                if (identificador <= 0 or (dia <= 0 and dia > 31)
+                        or (mes <= 0 and mes > 12) or (hora < 0 and hora > 24):
                     raise ValueError
-                return cpf
+                return identificador, dia, mes, hora
             except ValueError:
-                print("CPF inválido. preencha novamente, por favor.")
+                print("Informacoes invalidas. preencha novamente, por favor.")
 
-    def tela_lista_aluguel_mes(self):
-        pass
+
+    def tela_lista_aluguel_mes():
+
+
 
