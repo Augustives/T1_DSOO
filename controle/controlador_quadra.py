@@ -1,5 +1,5 @@
-from controle.abstract_controlador_quadra import AbstractControladorQuadra
-from entidade.quadra import Quadra
+from Controle.abstract_controlador_quadra import AbstractControladorQuadra
+from Entidade.quadra import Quadra
 
 class ControladorQuadra(AbstractControladorQuadra):
     def __init__(self):
@@ -52,7 +52,7 @@ class ControladorQuadra(AbstractControladorQuadra):
     def listar_quadras(self):
         self.__tela_quadra.tela_listar_quadrass()
         self.abre_tela_quadra()
-        
+
     @staticmethod
     def voltar():
         from controle.controlador_principal import ControladorPrincipal
