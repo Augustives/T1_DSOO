@@ -4,9 +4,12 @@ from entidade.cadastro_duplicado_exception import CadastroDuplicadoException
 
 
 class ControladorQuadra(AbstractControladorQuadra):
-    def __init__(self):
+    from controle.controlador_principal import ControladorPrincipal
+
+    def __init__(self, controlador_principal: ControladorPrincipal):
         from limite.tela_quadra import TelaQuadra
         super().__init__()
+        self.__controlador_principal = controlador_principal
         self.__tela_quadra = TelaQuadra(self)
         self.__lista_quadras = []
 
@@ -60,10 +63,8 @@ class ControladorQuadra(AbstractControladorQuadra):
         self.__tela_quadra.tela_listar_quadras()
         self.abre_tela_quadra()
 
-    @staticmethod
-    def voltar():
-        from controle.controlador_principal import ControladorPrincipal
-        ControladorPrincipal().inicia()
+    def voltar(self):
+        self.__controlador_principal.inicia()
 
     def abre_tela_quadra(self):
         escolhas = {1: self.add_quadra, 2: self.remove_quadra,

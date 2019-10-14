@@ -6,12 +6,12 @@ from controle.abstract_controlador_pessoa import AbstractControladorPessoa
 class ControladorPessoa(AbstractControladorPessoa):
     from controle.controlador_principal import ControladorPrincipal
 
-    def __init__(self, controlador: ControladorPrincipal):
+    def __init__(self, controlador_principal: ControladorPrincipal):
         from limite.tela_pessoa import TelaPessoa
         super().__init__()
         self.__tela_pessoa = TelaPessoa(self)
         self.__lista_pessoas = list()
-        self.__controlador = controlador
+        self.__controlador_principal = controlador_principal
 
     def inicia(self):
         self.abre_tela_pessoa()
@@ -88,7 +88,7 @@ class ControladorPessoa(AbstractControladorPessoa):
         self.abre_tela_pessoa()
 
     def voltar(self):
-        self.__controlador.inicia()
+        self.__controlador_principal.inicia()
 
     def abre_tela_pessoa(self):
         escolhas = {1: self.add_pessoa, 2: self.remove_pessoa,
