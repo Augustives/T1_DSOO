@@ -5,6 +5,7 @@ class AbstractControladorQuadra(ABC):
     @abstractmethod
     def __init__(self):
         self.__lista_quadras = []
+        self.__lista_identificador = []
         pass
 
     @abstractmethod
@@ -24,13 +25,17 @@ class AbstractControladorQuadra(ABC):
         pass
 
     @abstractmethod
-    def lista_quadras_tipo(self):
+    def listar_quadras(self):
         pass
 
     @abstractmethod
-    def lista_quadras_esporte(self):
+    def abre_tela_quadra(self):
         pass
 
     @abstractmethod
-    def abre_tela_quadras(self):
+    def voltar(self):
+        pass
+
+    @abstractmethod
+    def lista_identificador(self):
         pass

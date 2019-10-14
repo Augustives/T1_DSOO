@@ -1,6 +1,6 @@
-from controle.abstract_controlador_aluguel import AbstractControladorAluguel
-from entidade.aluguel import Aluguel
-from entidade.cadastro_duplicado_exception import CadastroDuplicadoException
+from Controle.abstract_controlador_aluguel import AbstractControladorAluguel
+from Entidade.aluguel import Aluguel
+from Entidade.cadastro_duplicado_exception import CadastroDuplicadoException
 from datetime import datetime
 
 

@@ -5,7 +5,7 @@ class TelaQuadra(AbstractTela):
     def __init__(self, controlador: ControladorQuadra):
         super().__init__()
         self.__controlador = controlador
-
+        self.__lista_identificador = self.__controlador.lista_identificador()
     def mostra_opcoes(self):
         print("---------- CADASTRO DE QUADRAS ----------")
         print("1 - Cadastrar quadra")
@@ -42,7 +42,7 @@ class TelaQuadra(AbstractTela):
         while True:
             try:
                 identificador = int(input("Identificador: "))
-                if identificador not in self.__controlador.lista_identificador:
+                if identificador not in self.__lista_identificador():
                     raise ValueError
                 return identificador
             except ValueError:
@@ -53,8 +53,8 @@ class TelaQuadra(AbstractTela):
         print("Você escolheu alterar as informações de uma quadra existente.")
         while True:
             try:
-                identificador = int(input("Por favor, informe o Identificador da quadra desejada."))
-                if identificador not in self.__controlador.lista_identificador:
+                identificador = int(input("Por favor, informe o Identificador da quadra desejada: "))
+                if identificador not in self.__lista_identificador():
                     raise ValueError
                 print("Por favor, forneça os dados atualizados da quadra.\n"
                       "Caso queira manter os dados atuais, "

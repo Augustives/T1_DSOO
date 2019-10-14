@@ -2,7 +2,7 @@ from limite.abstract_tela import AbstractTela
 
 
 class TelaAluguel(AbstractTela):
-    from controle.controlador_aluguel import ControladorAluguel
+    from Controle.controlador_aluguel import ControladorAluguel
 
     def __init__(self, controlador: ControladorAluguel):
         super().__init__()

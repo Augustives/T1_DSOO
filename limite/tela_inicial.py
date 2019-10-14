@@ -1,8 +1,8 @@
-from limite.abstract_tela import AbstractTela
+from Limite.abstract_tela import AbstractTela
 
 
 class TelaInicial(AbstractTela):
-    from controle.controlador_principal import ControladorPrincipal
+    from Controle.controlador_principal import ControladorPrincipal
 
     def __init__(self, controlador: ControladorPrincipal):
         super().__init__()

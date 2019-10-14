@@ -1,4 +1,4 @@
-from entidade.abstract_quadra import AbstractQuadra
+from Entidade.abstract_quadra import AbstractQuadra
 
 
 class Quadra(AbstractQuadra):

@@ -3,12 +3,16 @@ from Entidade.quadra import Quadra
 
 class ControladorQuadra(AbstractControladorQuadra):
     def __init__(self):
-        from limite.tela_quadra import TelaQuadra
+        from Limite.tela_quadra import TelaQuadra
         super().__init__()
         self.__tela_quadra = TelaQuadra(self)
         self.__lista_quadras = []
         self.__identificador = 0
         self.__lista_identificador = []
+
+    @property
+    def lista_identificador(self):
+        return self.__lista_identificador
 
     def inicia(self):
         self.abre_tela_quadra()
@@ -27,6 +31,7 @@ class ControladorQuadra(AbstractControladorQuadra):
         identificador = self.__tela_quadra.tela_remove_quadra()
         if identificador in self.__lista_quadras:
             self.lista_quadras().remove(identificador)
+
 
     def edit_quadra(self):
         esporte, tipo, identificador = self.__tela_quadra.tela_edit_quadra()
@@ -50,22 +55,18 @@ class ControladorQuadra(AbstractControladorQuadra):
         return self.__lista_quadras
 
     def listar_quadras(self):
-        self.__tela_quadra.tela_listar_quadrass()
+        self.__tela_quadra.tela_listar_quadras()
         self.abre_tela_quadra()
 
     @staticmethod
     def voltar():
-        from controle.controlador_principal import ControladorPrincipal
+        from Controle.controlador_principal import ControladorPrincipal
         ControladorPrincipal().inicia()
 
     def abre_tela_quadra(self):
         escolhas = {1: self.add_quadra, 2: self.remove_quadra,
-                    3: self.edit_quadra, 4: self.lista_quadras,
-                    5: self.lista_quadras_esporte, 0: self.voltar}
-        escolha = self.__tela_pessoa.mostra_opcoes()
+                    3: self.edit_quadra, 4: self.listar_quadras,
+                    5: self.listar_quadras, 0: self.voltar}
+        escolha = self.__tela_quadra.mostra_opcoes()
         funcao_escolhida = escolhas[escolha]
         funcao_escolhida()
-
-    @property
-    def lista_identificador(self):
-        return self.__lista_identificador
