@@ -97,3 +97,8 @@ class ControladorPessoa(AbstractControladorPessoa):
         escolha = self.__tela_pessoa.mostra_opcoes()
         funcao_escolhida = escolhas[escolha]
         funcao_escolhida()
+
+    def mostra_pessoa(self, cpf):
+        for pessoa in self.__lista_pessoas:
+            if pessoa.cpf == cpf:
+                return pessoa

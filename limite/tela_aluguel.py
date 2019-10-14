@@ -22,7 +22,8 @@ class TelaAluguel(AbstractTela):
                                       [1, 2, 3, 4, 5, 0])
         return escolha
 
-    def tela_add_aluguel(self):
+    @staticmethod
+    def tela_add_aluguel():
         print("Você escolheu cadastrar um novo aluguel. \n"
               "Informe os dados necessarios, por favor.")
         while True:
@@ -40,8 +41,18 @@ class TelaAluguel(AbstractTela):
                 print("Dados oferecidos inválidos. "
                       "Preencha novamente, por favor.")
 
-    def tela_remove_aluguel(self):
-        pass
+    @staticmethod
+    def tela_remove_aluguel():
+        print("Você escolheu excluir um aluguel. "
+              "Informe o Identificador da quadra, o dia, o mes e o horario, por favor.")
+        while True:
+            try:
+                cpf = str(input("CPF: "))
+                if len(cpf) != 11 or not cpf.isdigit():
+                    raise ValueError
+                return cpf
+            except ValueError:
+                print("CPF inválido. preencha novamente, por favor.")
 
     def tela_lista_aluguel_mes(self):
         pass

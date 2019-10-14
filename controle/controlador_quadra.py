@@ -77,3 +77,8 @@ class ControladorQuadra(AbstractControladorQuadra):
         escolha = self.__tela_quadra.mostra_opcoes()
         funcao_escolhida = escolhas[escolha]
         funcao_escolhida()
+
+    def mostra_quadra(self, identificador):
+        for quadra in self.__lista_quadras:
+            if quadra.identificador == identificador:
+                return quadra

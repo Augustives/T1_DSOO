@@ -33,3 +33,4 @@ class ControladorPrincipal(AbstractControladorPrincipal):
     @staticmethod
     def vai_controlador_aluguel():
         ControladorAluguel().inicia()
+
