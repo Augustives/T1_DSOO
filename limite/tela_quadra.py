@@ -63,7 +63,6 @@ class TelaQuadra(AbstractTela):
                       "apenas deixe o campo a ser preenchido em branco.")
                 esporte = str(input("Esporte: "))
                 tipo = str(input("Tipo: "))
-                identificador = int(input("Identificador: "))
                 return esporte, tipo, identificador
             except ValueError:
                 print("Identificador inválido. preencha novamente, por favor.")
@@ -76,9 +75,9 @@ class TelaQuadra(AbstractTela):
             print(quadra.tipo)
             print(quadra.identificador)
 
-    def tela_listar_quadras_esporte(self, esporte):
+    def tela_listar_quadras_esporte(self):
         print("Você escolheu visualizar todas as quadras casdastrada com esse esporte.")
-        str(input("Por favor, informe o esporte desejado: "))
+        esporte = str(input("Por favor, informe o esporte desejado: "))
         for quadra in self.__controlador.lista_quadras:
             if quadra.esporte == esporte:
                 print("-" * 30)
