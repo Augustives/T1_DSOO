@@ -1,6 +1,6 @@
-from Entidade.abstract_aluguel import AbstractAluguel
-from Entidade.quadra import Quadra
-from Entidade.pessoa import Pessoa
+from entidade.abstract_aluguel import AbstractAluguel
+from entidade.quadra import Quadra
+from entidade.pessoa import Pessoa
 from datetime import datetime
 
 

@@ -1,14 +1,17 @@
-from Entidade.pessoa import Pessoa
-from Entidade.cadastro_duplicado_exception import CadastroDuplicadoException
-from Controle.abstract_controlador_pessoa import AbstractControladorPessoa
+from entidade.pessoa import Pessoa
+from entidade.cadastro_duplicado_exception import CadastroDuplicadoException
+from controle.abstract_controlador_pessoa import AbstractControladorPessoa
 
 
 class ControladorPessoa(AbstractControladorPessoa):
-    def __init__(self):
-        from Limite.tela_pessoa import TelaPessoa
+    from controle.controlador_principal import ControladorPrincipal
+
+    def __init__(self, controlador: ControladorPrincipal):
+        from limite.tela_pessoa import TelaPessoa
         super().__init__()
         self.__tela_pessoa = TelaPessoa(self)
         self.__lista_pessoas = list()
+        self.__controlador = controlador
 
     def inicia(self):
         self.abre_tela_pessoa()
@@ -84,10 +87,8 @@ class ControladorPessoa(AbstractControladorPessoa):
         self.__tela_pessoa.tela_listar_pessoas()
         self.abre_tela_pessoa()
 
-    @staticmethod
-    def voltar():
-        from Controle.controlador_principal import ControladorPrincipal
-        ControladorPrincipal().inicia()
+    def voltar(self):
+        self.__controlador.inicia()
 
     def abre_tela_pessoa(self):
         escolhas = {1: self.add_pessoa, 2: self.remove_pessoa,

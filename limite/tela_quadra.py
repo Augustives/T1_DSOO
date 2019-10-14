@@ -1,5 +1,6 @@
-from Controle.controlador_quadra import ControladorQuadra
-from Limite.abstract_tela import AbstractTela
+from controle.controlador_quadra import ControladorQuadra
+from limite.abstract_tela import AbstractTela
+
 
 class TelaQuadra(AbstractTela):
     def __init__(self, controlador: ControladorQuadra):
