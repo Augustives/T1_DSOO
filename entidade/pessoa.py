@@ -1,4 +1,4 @@
-from Entidade.abstract_pessoa import AbstractPessoa
+from entidade.abstract_pessoa import AbstractPessoa
 
 
 class Pessoa(AbstractPessoa):

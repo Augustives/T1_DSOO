@@ -1,14 +1,15 @@
-from Controle.controlador_pessoa import ControladorPessoa
-from Controle.controlador_aluguel import ControladorAluguel
-from Controle.controlador_quadra import ControladorQuadra
-from Controle.abstract_controlador_principal import AbstractControladorPrincipal
+from controle.controlador_aluguel import ControladorAluguel
+from controle.controlador_quadra import ControladorQuadra
+from controle.abstract_controlador_principal import AbstractControladorPrincipal
 
 
 class ControladorPrincipal(AbstractControladorPrincipal):
     def __init__(self):
-        from Limite.tela_inicial import TelaInicial
+        from limite.tela_inicial import TelaInicial
+        from controle.controlador_pessoa import ControladorPessoa
         super().__init__()
         self.__tela_inicial = TelaInicial(self)
+        self.__controlador_pessoa = ControladorPessoa(self)
 
     def inicia(self):
         self.abre_tela_inicial()
@@ -22,9 +23,8 @@ class ControladorPrincipal(AbstractControladorPrincipal):
         funcao_escolhida = escolhas[escolha]
         funcao_escolhida()
 
-    @staticmethod
-    def vai_controlador_pessoa():
-        ControladorPessoa().inicia()
+    def vai_controlador_pessoa(self):
+        self.__controlador_pessoa.inicia()
 
     @staticmethod
     def vai_controlador_quadra():

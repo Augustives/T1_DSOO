@@ -1,8 +1,8 @@
-from Limite.abstract_tela import AbstractTela
+from limite.abstract_tela import AbstractTela
 
 
 class TelaPessoa(AbstractTela):
-    from Controle.controlador_pessoa import ControladorPessoa
+    from controle.controlador_pessoa import ControladorPessoa
 
     def __init__(self, controlador: ControladorPessoa):
         super().__init__()

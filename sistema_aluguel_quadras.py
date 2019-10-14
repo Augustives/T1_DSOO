@@ -1,4 +1,4 @@
-from Controle.controlador_principal import ControladorPrincipal
+from controle.controlador_principal import ControladorPrincipal
 
 print(__name__)
 if __name__ == "__main__":

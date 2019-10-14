@@ -1,9 +1,10 @@
-from Controle.abstract_controlador_quadra import AbstractControladorQuadra
-from Entidade.quadra import Quadra
+from controle.abstract_controlador_quadra import AbstractControladorQuadra
+from entidade.quadra import Quadra
+
 
 class ControladorQuadra(AbstractControladorQuadra):
     def __init__(self):
-        from Limite.tela_quadra import TelaQuadra
+        from limite.tela_quadra import TelaQuadra
         super().__init__()
         self.__tela_quadra = TelaQuadra(self)
         self.__lista_quadras = []
@@ -32,7 +33,6 @@ class ControladorQuadra(AbstractControladorQuadra):
         if identificador in self.__lista_quadras:
             self.lista_quadras().remove(identificador)
 
-
     def edit_quadra(self):
         esporte, tipo, identificador = self.__tela_quadra.tela_edit_quadra()
         for quadra in self.__lista_quadras:
@@ -60,7 +60,7 @@ class ControladorQuadra(AbstractControladorQuadra):
 
     @staticmethod
     def voltar():
-        from Controle.controlador_principal import ControladorPrincipal
+        from controle.controlador_principal import ControladorPrincipal
         ControladorPrincipal().inicia()
 
     def abre_tela_quadra(self):
