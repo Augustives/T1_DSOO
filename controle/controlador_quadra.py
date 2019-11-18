@@ -10,7 +10,9 @@ class ControladorQuadra(AbstractControladorQuadra):
         from limite.tela_quadra import TelaQuadra
         super().__init__()
         self.__controlador_principal = controlador_principal
-        self.__tela_quadra = TelaQuadra(self)
+        self.__tela_quadra = TelaQuadra(self, 'Tela Quadra', ['Cadastrar Quadra', 'Excluir Quadra',
+                                                              'Editar Quadra', 'Listar Quadras',
+                                                              'Listar Quadras por Esporte', 'Voltar'])
         self.__lista_quadras = []
 
     def inicia(self):
@@ -73,8 +75,10 @@ class ControladorQuadra(AbstractControladorQuadra):
     def abre_tela_quadra(self):
         escolhas = {1: self.add_quadra, 2: self.remove_quadra,
                     3: self.edit_quadra, 4: self.listar_quadras,
-                    5: self.listar_quadras_esporte, 0: self.voltar}
+                    5: self.listar_quadras_esporte, 6: self.voltar}
         escolha = self.__tela_quadra.mostra_opcoes()
+        if escolha is None:
+            escolha = 6
         funcao_escolhida = escolhas[escolha]
         funcao_escolhida()
 
