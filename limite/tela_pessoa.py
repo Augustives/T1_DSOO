@@ -1,26 +1,13 @@
-from limite.abstract_tela import AbstractTela
+from limite.abstract_opcoes import AbstractOpcoes
 
 
-class TelaPessoa(AbstractTela):
+class TelaPessoa(AbstractOpcoes):
     from controle.controlador_pessoa import ControladorPessoa
 
-    def __init__(self, controlador: ControladorPessoa):
-        super().__init__()
+    def __init__(self, controlador: ControladorPessoa,
+                 nome_tela: str, texto_botoes: list):
+        super().__init__(nome_tela, texto_botoes)
         self.__controlador = controlador
-
-    def mostra_opcoes(self):
-        print("---------- CADASTRO DE USUÁRIO ----------")
-        print("1 - Cadastrar usuário")
-        print("2 - Excluir usuário")
-        print("3 - Alterar informações do usuário")
-        print("4 - Listar todos os usuários")
-        print("5 - Encontrar usuário cadastrado.")
-        print("0 - Voltar")
-        print("-----------------------------------------")
-
-        escolha = self.le_num_inteiro("Escolha uma das opções:",
-                                      [1, 2, 3, 4, 5, 0])
-        return escolha
 
     @staticmethod
     def tela_add_pessoa():

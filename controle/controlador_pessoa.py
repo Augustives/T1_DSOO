@@ -9,7 +9,10 @@ class ControladorPessoa(AbstractControladorPessoa):
     def __init__(self, controlador_principal: ControladorPrincipal):
         from limite.tela_pessoa import TelaPessoa
         super().__init__()
-        self.__tela_pessoa = TelaPessoa(self)
+        self.__tela_pessoa = TelaPessoa(self, 'Tela Pessoa',
+                                        ['Cadastrar Usuário', 'Remover Usuário',
+                                         'Editar Usuário', 'Listar Pessoas',
+                                         'Encontrar Pessoa', 'Voltar'])
         self.__lista_pessoas = list()
         self.__controlador_principal = controlador_principal
 
@@ -93,7 +96,7 @@ class ControladorPessoa(AbstractControladorPessoa):
     def abre_tela_pessoa(self):
         escolhas = {1: self.add_pessoa, 2: self.remove_pessoa,
                     3: self.edit_pessoa, 4: self.listar_pessoas,
-                    5: self.dados_pessoa, 0: self.voltar}
+                    5: self.dados_pessoa, 6: self.voltar}
         escolha = self.__tela_pessoa.mostra_opcoes()
         funcao_escolhida = escolhas[escolha]
         funcao_escolhida()
