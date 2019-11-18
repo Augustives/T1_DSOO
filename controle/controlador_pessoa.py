@@ -98,6 +98,8 @@ class ControladorPessoa(AbstractControladorPessoa):
                     3: self.edit_pessoa, 4: self.listar_pessoas,
                     5: self.dados_pessoa, 6: self.voltar}
         escolha = self.__tela_pessoa.mostra_opcoes()
+        if escolha is None:
+            escolha = 6
         funcao_escolhida = escolhas[escolha]
         funcao_escolhida()
 

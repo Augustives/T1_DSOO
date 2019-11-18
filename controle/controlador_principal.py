@@ -8,7 +8,9 @@ class ControladorPrincipal(AbstractControladorPrincipal):
         from controle.controlador_quadra import ControladorQuadra
         from controle.controlador_aluguel import ControladorAluguel
         super().__init__()
-        self.__tela_inicial = TelaInicial(self)
+        self.__tela_inicial = TelaInicial(self, 'Tela Inicial', ['Pessoas',
+                                                                 'Quadras',
+                                                                 'Aluguéis'])
         self.__controlador_pessoa = ControladorPessoa(self)
         self.__controlador_quadra = ControladorQuadra(self)
         self.__controlador_aluguel = ControladorAluguel(self)

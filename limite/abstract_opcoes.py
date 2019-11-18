@@ -4,7 +4,8 @@ import PySimpleGUI as sg
 class AbstractOpcoes:
     def __init__(self, nome_tela: str, texto_botoes: list):
         self.__janela = None
-        self.configura(nome_tela, texto_botoes)
+        self.__nome_tela = nome_tela
+        self.__texto_botoes = texto_botoes
 
     def configura(self, nome_tela: str, texto_botoes: list):
         sg.ChangeLookAndFeel("Reddit")
@@ -19,13 +20,11 @@ class AbstractOpcoes:
                                   element_justification="center")
 
     def mostra_opcoes(self):
-        while True:
-            button, values = self.__janela.Read()
-            if button is None or button == 6:
-                self.__janela.close()
-                return 6
+        self.configura(self.__nome_tela, self.__texto_botoes)
+        button, values = self.__janela.Read()
+        self.__janela.Close()
+        return button
 
-            return button
 
 
 
