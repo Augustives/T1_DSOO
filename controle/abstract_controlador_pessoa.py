@@ -31,10 +31,6 @@ class AbstractControladorPessoa(ABC):
         pass
 
     @abstractmethod
-    def listar_pessoas(self):
-        pass
-
-    @abstractmethod
     def voltar(self):
         pass
 

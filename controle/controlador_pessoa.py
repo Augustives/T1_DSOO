@@ -13,7 +13,7 @@ class ControladorPessoa(AbstractControladorPessoa):
         self.__lista_nomes = list()
         self.__tela_pessoa = TelaPessoa(self, 'Tela Pessoa',
                                         ['Cadastrar Usuário', 'Remover Usuário',
-                                         'Editar Usuário', 'Listar Pessoas',
+                                         'Editar Usuário',
                                          'Dados Pessoa', 'Voltar'],
                                         self.__lista_nomes)
         self.__controlador_principal = controlador_principal
@@ -110,22 +110,18 @@ class ControladorPessoa(AbstractControladorPessoa):
     def lista_nomes(self):
         return self.__lista_nomes
 
-    def listar_pessoas(self):
-        self.__tela_pessoa.tela_listar_pessoas()
-        self.abre_tela_pessoa()
-
     def voltar(self):
         self.__controlador_principal.inicia()
 
     def abre_tela_pessoa(self):
         escolhas = {1: self.add_pessoa, 2: self.remove_pessoa,
-                    3: self.edit_pessoa, 4: self.listar_pessoas,
-                    5: self.dados_pessoa, 6: self.voltar}
+                    3: self.edit_pessoa,
+                    4: self.dados_pessoa, 5: self.voltar}
         escolha, nome = self.__tela_pessoa.mostra_opcoes()
         if escolha is None:
             escolha = 6
         funcao_escolhida = escolhas[escolha]
-        if escolha in [1, 4, 6]:
+        if escolha in [1, 5]:
             funcao_escolhida()
         else:
             funcao_escolhida(nome[0][0])
