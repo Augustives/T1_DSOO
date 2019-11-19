@@ -35,7 +35,7 @@ class ControladorPessoa(AbstractControladorPessoa):
             self.abre_tela_pessoa()
         try:
             for pessoa in self.__lista_pessoas:
-                if pessoa.cpf == cpf:
+                if pessoa.nome == nome:
                     raise CadastroDuplicadoException
         except CadastroDuplicadoException:
             print("Pessoa já cadastrada.")
