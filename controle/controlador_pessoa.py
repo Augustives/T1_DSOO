@@ -10,19 +10,20 @@ class ControladorPessoa(AbstractControladorPessoa):
         from limite.tela_pessoa import TelaPessoa
         super().__init__()
         self.__lista_pessoas = list()
+        self.__lista_nomes = list()
         self.__tela_pessoa = TelaPessoa(self, 'Tela Pessoa',
                                         ['Cadastrar Usuário', 'Remover Usuário',
                                          'Editar Usuário', 'Listar Pessoas',
-                                         'Encontrar Pessoa', 'Voltar'],
-                                        self.lista_pessoas)
+                                         'Dados Pessoa', 'Voltar'],
+                                        self.__lista_nomes)
         self.__controlador_principal = controlador_principal
 
     def inicia(self):
         self.abre_tela_pessoa()
 
     def add_pessoa(self):
-        from limite.tela_add_pessoa import TelaAddPessoa
-        tela_add_pessoa = TelaAddPessoa('Cadastrar Usuário',
+        from limite.tela_add_edit_pessoa import TelaAddEditPessoa
+        tela_add_pessoa = TelaAddEditPessoa('Cadastrar Usuário',
                                         ['Nome', 'CPF', 'Telefone', 'E-mail'],
                                         'Cadastrar')
         nome, cpf, telefone, email = tela_add_pessoa.mostra_opcoes()
@@ -36,25 +37,40 @@ class ControladorPessoa(AbstractControladorPessoa):
 
         pessoa_incluida = Pessoa(nome, cpf, telefone, email)
         self.__lista_pessoas.append(pessoa_incluida)
+        self.__lista_nomes.append(pessoa_incluida.nome)
         print("Usuário cadastrado com sucesso.")
         self.abre_tela_pessoa()
 
-    def remove_pessoa(self):
-        cpf = self.__tela_pessoa.tela_remove_pessoa()
-        for pessoa in self.__lista_pessoas:
-            if pessoa.cpf == cpf:
-                self.__lista_pessoas.remove(pessoa)
-                print("Usuário removido com sucesso.")
-                self.abre_tela_pessoa()
-        print("Usuário inexistente.")
-        self.abre_tela_pessoa()
+    def remove_pessoa(self, nome: str):
+        from limite.tela_remove_pessoa import TelaRemovePessoa
+        tela_confirmacao = TelaRemovePessoa('Tela Pessoa',
+                                            'Você tem certeza que deseja \n '
+                                            'excluir esse cadastro?')
+        confirmacao = tela_confirmacao.mostra_opcoes()
+        if confirmacao == 1:
+            for pessoa in self.__lista_pessoas:
+                if pessoa.nome == nome:
+                    self.__lista_pessoas.remove(pessoa)
+                    self.__lista_nomes.remove(pessoa.nome)
+                    print("Usuário removido com sucesso.")
+                    self.abre_tela_pessoa()
+            print("Usuário inexistente.")
+            self.abre_tela_pessoa()
+        else:
+            self.abre_tela_pessoa()
 
-    def edit_pessoa(self):
-        cpf, nome, telefone, email = self.__tela_pessoa.tela_edit_pessoa()
+    def edit_pessoa(self, nome_escolhido: str):
+        from limite.tela_add_edit_pessoa import TelaAddEditPessoa
+        tela_add_pessoa = TelaAddEditPessoa('Editar Usuário',
+                                            ['Nome', 'CPF', 'Telefone', 'E-mail'],
+                                            'Cadastrar')
+        novo_nome, cpf, telefone, email = tela_add_pessoa.mostra_opcoes()
         for pessoa in self.__lista_pessoas:
-            if pessoa.cpf == cpf:
-                if nome != "":
-                    pessoa.nome = nome
+            if pessoa.nome == nome_escolhido:
+                if novo_nome != "":
+                    pessoa.nome = novo_nome
+                    self.__lista_nomes[self.__lista_nomes.index(nome_escolhido)] \
+                        = novo_nome
                 if telefone != "":
                     try:
                         telefone = int(telefone)
@@ -73,10 +89,9 @@ class ControladorPessoa(AbstractControladorPessoa):
         print("Usuário inexistente.")
         self.abre_tela_pessoa()
 
-    def dados_pessoa(self):
-        cpf = self.__tela_pessoa.tela_dados_pessoa()
+    def dados_pessoa(self, nome: str):
         for pessoa in self.__lista_pessoas:
-            if pessoa.cpf == cpf:
+            if pessoa.nome == nome:
                 print("-" * 30)
                 print("DADOS DO USUÁRIO:\n "
                       "CPF: {}\n "
@@ -90,6 +105,10 @@ class ControladorPessoa(AbstractControladorPessoa):
     @property
     def lista_pessoas(self):
         return self.__lista_pessoas
+
+    @property
+    def lista_nomes(self):
+        return self.__lista_nomes
 
     def listar_pessoas(self):
         self.__tela_pessoa.tela_listar_pessoas()
@@ -109,8 +128,7 @@ class ControladorPessoa(AbstractControladorPessoa):
         if escolha in [1, 4, 6]:
             funcao_escolhida()
         else:
-            print(nome)
-            funcao_escolhida()
+            funcao_escolhida(nome[0][0])
 
     def encontra_pessoa(self, cpf):
         for pessoa in self.__lista_pessoas:

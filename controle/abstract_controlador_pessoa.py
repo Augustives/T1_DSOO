@@ -15,15 +15,15 @@ class AbstractControladorPessoa(ABC):
         pass
 
     @abstractmethod
-    def remove_pessoa(self):
+    def remove_pessoa(self, nome: str):
         pass
 
     @abstractmethod
-    def edit_pessoa(self):
+    def edit_pessoa(self, nome: str):
         pass
 
     @abstractmethod
-    def dados_pessoa(self):
+    def dados_pessoa(self, nome: str):
         pass
 
     @abstractmethod
