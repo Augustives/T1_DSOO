@@ -9,18 +9,23 @@ class ControladorPessoa(AbstractControladorPessoa):
     def __init__(self, controlador_principal: ControladorPrincipal):
         from limite.tela_pessoa import TelaPessoa
         super().__init__()
+        self.__lista_pessoas = list()
         self.__tela_pessoa = TelaPessoa(self, 'Tela Pessoa',
                                         ['Cadastrar Usuário', 'Remover Usuário',
                                          'Editar Usuário', 'Listar Pessoas',
-                                         'Encontrar Pessoa', 'Voltar'])
-        self.__lista_pessoas = list()
+                                         'Encontrar Pessoa', 'Voltar'],
+                                        self.lista_pessoas)
         self.__controlador_principal = controlador_principal
 
     def inicia(self):
         self.abre_tela_pessoa()
 
     def add_pessoa(self):
-        nome, cpf, telefone, email = self.__tela_pessoa.tela_add_pessoa()
+        from limite.tela_add_pessoa import TelaAddPessoa
+        tela_add_pessoa = TelaAddPessoa('Cadastrar Usuário',
+                                        ['Nome', 'CPF', 'Telefone', 'E-mail'],
+                                        'Cadastrar')
+        nome, cpf, telefone, email = tela_add_pessoa.mostra_opcoes()
         try:
             for pessoa in self.__lista_pessoas:
                 if pessoa.cpf == cpf:
@@ -97,11 +102,15 @@ class ControladorPessoa(AbstractControladorPessoa):
         escolhas = {1: self.add_pessoa, 2: self.remove_pessoa,
                     3: self.edit_pessoa, 4: self.listar_pessoas,
                     5: self.dados_pessoa, 6: self.voltar}
-        escolha = self.__tela_pessoa.mostra_opcoes()
+        escolha, nome = self.__tela_pessoa.mostra_opcoes()
         if escolha is None:
             escolha = 6
         funcao_escolhida = escolhas[escolha]
-        funcao_escolhida()
+        if escolha in [1, 4, 6]:
+            funcao_escolhida()
+        else:
+            print(nome)
+            funcao_escolhida()
 
     def encontra_pessoa(self, cpf):
         for pessoa in self.__lista_pessoas:
