@@ -28,6 +28,12 @@ class ControladorPessoa(AbstractControladorPessoa):
                                         'Cadastrar')
         nome, cpf, telefone, email = tela_add_pessoa.mostra_opcoes()
         try:
+            if (nome == "" or email == "" or
+                    len(cpf) != 11 or not cpf.isdigit()):
+                raise ValueError
+        except ValueError:
+            self.abre_tela_pessoa()
+        try:
             for pessoa in self.__lista_pessoas:
                 if pessoa.cpf == cpf:
                     raise CadastroDuplicadoException
@@ -79,12 +85,6 @@ class ControladorPessoa(AbstractControladorPessoa):
                         print("Telefone inválido.")
                 if email != "":
                     pessoa.email = email
-                print("INFORMAÇÕES ATUALIZADAS:\n "
-                      "CPF: {}\n "
-                      "Nome: {}\n "
-                      "Telefone: {}\n "
-                      "Email: {}".format(pessoa.cpf, pessoa.nome,
-                                         pessoa.telefone, pessoa.email))
                 self.abre_tela_pessoa()
         print("Usuário inexistente.")
         self.abre_tela_pessoa()
@@ -124,7 +124,10 @@ class ControladorPessoa(AbstractControladorPessoa):
         if escolha in [1, 5]:
             funcao_escolhida()
         else:
-            funcao_escolhida(nome[0][0])
+            try:
+                funcao_escolhida(nome[0][0])
+            except IndexError:
+                self.abre_tela_pessoa()
 
     def encontra_pessoa(self, cpf):
         for pessoa in self.__lista_pessoas:
