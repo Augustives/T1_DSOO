@@ -90,15 +90,15 @@ class ControladorPessoa(AbstractControladorPessoa):
         self.abre_tela_pessoa()
 
     def dados_pessoa(self, nome: str):
+        from limite.tela_dados_pessoa import TelaDadosPessoa
         for pessoa in self.__lista_pessoas:
             if pessoa.nome == nome:
-                print("-" * 30)
-                print("DADOS DO USUÁRIO:\n "
-                      "CPF: {}\n "
-                      "Nome: {}\n "
-                      "Telefone: {}\n "
-                      "Email: {}".format(pessoa.cpf, pessoa.nome, pessoa.telefone, pessoa.email))
-                self.abre_tela_pessoa()
+                tela_dados_pessoa = TelaDadosPessoa('Dados do Usuário',
+                                                    [pessoa.nome, pessoa.cpf,
+                                                     pessoa.telefone, pessoa.email])
+                voltar = tela_dados_pessoa.mostra_opcoes()
+                if voltar == 1:
+                    self.abre_tela_pessoa()
         print("Usuário inexistente.")
         self.abre_tela_pessoa()
 

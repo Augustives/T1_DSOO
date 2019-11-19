@@ -1,7 +1,7 @@
 import PySimpleGUI as sg
 
 
-class AbstractSimNao:
+class AbstractDados:
     def __init__(self, nome_tela: str, lista_dados: list):
         self.__nome_tela = nome_tela
         self.__lista_dados = lista_dados
@@ -27,9 +27,3 @@ class AbstractSimNao:
         button, values = self.__janela.Read()
         self.__janela.Close()
         return button
-
-
-tela = AbstractSimNao('Dados Usuário', ['Gabriel', 'CPF', 'fone', 'email'])
-botao = tela.mostra_opcoes()
-print(botao)
-
