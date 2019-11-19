@@ -1,3 +1,6 @@
+
+from controle.dao.abc_dao import DAO
+
 class QuadraDAO(DAO):
     def __init__(self):
         super().__init__("quadra.pkl")
