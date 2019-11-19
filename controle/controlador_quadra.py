@@ -19,7 +19,12 @@ class ControladorQuadra(AbstractControladorQuadra):
         self.abre_tela_quadra()
 
     def add_quadra(self):
-        esporte, tipo, identificador = self.__tela_quadra.tela_add_quadra()
+        from limite.tela_add_quadra import TelaAddQuadra
+        tela_add_quadra = TelaAddQuadra('Cadastrar Quadra',
+                                        ['Esporte', 'Tipo', 'Identificador'],
+                                        'Cadastrar')
+        esporte, tipo, identificador = tela_add_quadra.mostra_opcoes()
+
         try:
             for quadra in self.__lista_quadras:
                 if quadra.identificador == identificador:
@@ -34,14 +39,22 @@ class ControladorQuadra(AbstractControladorQuadra):
         self.abre_tela_quadra()
 
     def remove_quadra(self):
-        identificador = self.__tela_quadra.tela_remove_quadra()
+        from limite.tela_remove_quadra import TelaRemoveQuadra
+        tela_remove_quadra = TelaRemoveQuadra('Remover Quadra',
+                                        ['Identificador'],
+                                        'Remover')
+        identificador = tela_remove_quadra.mostra_opcoes()
         for quadra in self.__lista_quadras:
             if identificador == quadra.identificador:
                 self.lista_quadras.remove(quadra)
         self.abre_tela_quadra()
 
     def edit_quadra(self):
-        esporte, tipo, identificador = self.__tela_quadra.tela_edit_quadra()
+        from limite.tela_edit_quadra import TelaEditQuadra
+        tela_edit_quadra = TelaEditQuadra('Editar Quadra',
+                                        ['Esporte', 'Tipo', 'Identificador'],
+                                        'Editar')
+        esporte, tipo, identificador = tela_edit_quadra.mostra_opcoes()
         for quadra in self.__lista_quadras:
             if quadra.identificador == identificador:
                 if esporte != "":
