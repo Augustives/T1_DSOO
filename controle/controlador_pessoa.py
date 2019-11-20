@@ -129,7 +129,7 @@ class ControladorPessoa(AbstractControladorPessoa):
             except IndexError:
                 self.abre_tela_pessoa()
 
-    def encontra_pessoa(self, cpf):
+    def encontra_pessoa(self, nome):
         for pessoa in self.__lista_pessoas:
-            if pessoa.cpf == cpf:
+            if pessoa.nome == nome:
                 return pessoa

@@ -15,15 +15,11 @@ class AbstractControladorAluguel(ABC):
         pass
 
     @abstractmethod
-    def remove_aluguel(self):
+    def remove_aluguel(self, info_aluguel: list):
         pass
 
     @abstractmethod
-    def lista_aluguel_mes(self):
-        pass
-
-    @abstractmethod
-    def lista_aluguel_dia(self):
+    def lista_aluguel_dia(self, info_aluguel: list):
         pass
 
     @abstractmethod
@@ -31,9 +27,7 @@ class AbstractControladorAluguel(ABC):
         pass
 
     @abstractmethod
-    def recibo(self, nome: str, cpf: str,
-               esporte: str, dia: int,
-               mes: int, horario: int):
+    def recibo(self, info_aluguel: list):
         pass
 
     @abstractmethod

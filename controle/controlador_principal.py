@@ -41,3 +41,9 @@ class ControladorPrincipal(AbstractControladorPrincipal):
 
     def encontra_quadra(self, identificador):
         return self.__controlador_quadra.encontra_quadra(identificador)
+
+    def lista_nomes_pessoas(self):
+        return self.__controlador_pessoa.lista_nomes
+
+    def lista_info_quadras(self):
+        return self.__controlador_quadra.lista_nomes

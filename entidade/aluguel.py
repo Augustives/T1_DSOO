@@ -4,7 +4,7 @@ from entidade.pessoa import Pessoa
 
 
 class Aluguel(AbstractAluguel):
-    def __init__(self, pessoa: Pessoa, quadra: Quadra, dia: int, mes: int, hora: int):
+    def __init__(self, pessoa: Pessoa, quadra: Quadra, dia: str, mes: str, hora: str):
         super().__init__()
         self.__pessoa = pessoa
         self.__quadra = quadra

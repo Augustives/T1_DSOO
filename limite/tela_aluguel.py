@@ -1,25 +1,13 @@
-from limite.abstract_tela import AbstractTela
+from limite.abstract_listagem import AbstractListagem
 
 
-class TelaAluguel(AbstractTela):
+class TelaAluguel(AbstractListagem):
     from controle.controlador_aluguel import ControladorAluguel
 
-    def __init__(self, controlador: ControladorAluguel):
-        super().__init__()
+    def __init__(self, controlador: ControladorAluguel,
+                 nome_tela: str, texto_botoes: list, lista_alugueis: list):
+        super().__init__(nome_tela, texto_botoes, lista_alugueis)
         self.__controlador = controlador
-
-    def mostra_opcoes(self):
-        print("---------- CADASTRO ALUGUÉIS----------")
-        print("1 - Adicionar um aluguel.")
-        print("2 - Remover um aluguel.")
-        print("3 - Listar alugueis no mes.")
-        print("4 - Listar alugueis por dia.")
-        print("0 - Voltar")
-        print("-----------------------------------------")
-
-        escolha = self.le_num_inteiro("Escolha uma das opções:",
-                                      [1, 2, 3, 4, 0])
-        return escolha
 
     @staticmethod
     def tela_add_aluguel():
