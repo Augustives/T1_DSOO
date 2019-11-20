@@ -1,4 +1,7 @@
+from controle.abc_dao import DAO
+
 class PessoaDAO(DAO):
+    from entidade.pessoa import Pessoa
     def __init__(self):
         super().__init__("pessoa.pkl")
 
