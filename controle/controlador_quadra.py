@@ -1,7 +1,7 @@
 from controle.abstract_controlador_quadra import AbstractControladorQuadra
 from entidade.quadra import Quadra
 from entidade.cadastro_duplicado_exception import CadastroDuplicadoException
-
+from controle.quadra_dao import QuadraDAO
 
 class ControladorQuadra(AbstractControladorQuadra):
     from controle.controlador_principal import ControladorPrincipal
@@ -15,6 +15,7 @@ class ControladorQuadra(AbstractControladorQuadra):
         self.__tela_quadra = TelaQuadra(self, 'Tela Quadra', ['Cadastrar Quadra', 'Excluir Quadra',
                                                               'Editar Quadra', 'Voltar'],
                                         self.__lista_nomes)
+        self.__quadras_DAO = QuadraDAO()
 
     def inicia(self):
         self.abre_tela_quadra()

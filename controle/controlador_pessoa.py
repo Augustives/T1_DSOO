@@ -1,7 +1,7 @@
 from entidade.pessoa import Pessoa
 from entidade.cadastro_duplicado_exception import CadastroDuplicadoException
 from controle.abstract_controlador_pessoa import AbstractControladorPessoa
-
+from controle.pessoa_dao import PessoaDAO
 
 class ControladorPessoa(AbstractControladorPessoa):
     from controle.controlador_principal import ControladorPrincipal
@@ -17,6 +17,7 @@ class ControladorPessoa(AbstractControladorPessoa):
                                          'Dados Pessoa', 'Voltar'],
                                         self.__lista_nomes)
         self.__controlador_principal = controlador_principal
+        self.__pessoas_DAO = PessoaDAO()
 
     def inicia(self):
         self.abre_tela_pessoa()
