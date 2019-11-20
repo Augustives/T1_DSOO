@@ -1,7 +1,7 @@
-
-from controle.dao.abc_dao import DAO
+from controle.abc_dao import DAO
 
 class QuadraDAO(DAO):
+    from entidade.quadra import Quadra
     def __init__(self):
         super().__init__("quadra.pkl")
 
@@ -16,3 +16,6 @@ class QuadraDAO(DAO):
     def remove(self, identificador):
         if isinstance(identificador, int):
             super().remove(identificador)
+
+    def lista(self):
+        return super().get_all()

@@ -13,3 +13,6 @@ class PessoaDAO(DAO):
     def remove(self, cpf):
         if isinstance(cpf, int):
             super().remove(cpf)
+
+    def lista(self):
+        return super().get_all()

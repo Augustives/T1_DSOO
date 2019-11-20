@@ -2,7 +2,7 @@ import pickle
 from abc import ABC, abstractmethod
 
 
-class Dao:
+class DAO(ABC):
     def __init__(self, datasource=""):
         self.__datasource = datasource
         self.__objectcache = {}
@@ -12,10 +12,11 @@ class Dao:
             self.__dump()
 
     def __dump(self):
-        pickle.dump(self.__objectcache, open(self.__datasource, "wb")
+        pickle.dump(self.__objectcache, open(self.__datasource, 'wb'))
 
     def __load(self):
-        self.__objectcache = pickle.load(open(self.__datasource, "rb")
+        self.__objectcache = pickle.load(open(self.__datasource, 'rb'))
+
 
     def add(self, key, objeto):
         self.__objectcache[key] = objeto
