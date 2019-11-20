@@ -17,7 +17,7 @@ class ControladorPessoa(AbstractControladorPessoa):
                                          'Dados Pessoa', 'Voltar'],
                                         self.__lista_nomes)
         self.__controlador_principal = controlador_principal
-        self.__pessoas_DAO = PessoaDAO()
+
 
     def inicia(self):
         self.abre_tela_pessoa()

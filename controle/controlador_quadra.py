@@ -10,12 +10,12 @@ class ControladorQuadra(AbstractControladorQuadra):
         from limite.tela_quadra import TelaQuadra
         super().__init__()
         self.__controlador_principal = controlador_principal
-        self.__lista_quadras = list()
         self.__lista_nomes = list()
         self.__tela_quadra = TelaQuadra(self, 'Tela Quadra', ['Cadastrar Quadra', 'Excluir Quadra',
                                                               'Editar Quadra', 'Voltar'],
                                         self.__lista_nomes)
         self.__quadras_DAO = QuadraDAO()
+        self.__lista_quadras = []
 
     def inicia(self):
         self.abre_tela_quadra()
@@ -30,7 +30,7 @@ class ControladorQuadra(AbstractControladorQuadra):
         try:
             if esporte == "" or tipo == "" or int(identificador) <= 0:
                 raise ValueError
-            for quadra in self.__lista_quadras:
+            for quadra in self.__quadras_DAO.get_all():
                 if quadra.identificador == identificador:
                     raise CadastroDuplicadoException
         except CadastroDuplicadoException:
@@ -41,6 +41,7 @@ class ControladorQuadra(AbstractControladorQuadra):
             self.abre_tela_quadra()
 
         quadra_nova = Quadra(esporte, tipo, identificador)
+        self.__quadras_DAO.add(quadra_nova)
         self.__lista_quadras.append(quadra_nova)
         self.__lista_nomes.append([quadra_nova.esporte, quadra_nova.tipo,
                                   quadra_nova.identificador])
@@ -73,7 +74,7 @@ class ControladorQuadra(AbstractControladorQuadra):
                                              ['Esporte', 'Tipo', 'Identificador'],
                                              'Alterar Informações')
         esporte, tipo, identificador = tela_edit_quadra.mostra_opcoes()
-        for quadra in self.__lista_quadras:
+        for quadra in self.__quadras_DAO.get_all():
             if quadra.identificador == info_quadra[2]:
                 info_antiga = [quadra.esporte, quadra.tipo, quadra.identificador]
                 if esporte != "":
@@ -90,7 +91,7 @@ class ControladorQuadra(AbstractControladorQuadra):
 
     @property
     def lista_quadras(self):
-        return self.__lista_quadras
+        return self.__quadras_DAO.get_all()
 
     @property
     def lista_nomes(self):
@@ -115,6 +116,4 @@ class ControladorQuadra(AbstractControladorQuadra):
                 self.abre_tela_quadra()
 
     def encontra_quadra(self, identificador):
-        for quadra in self.__lista_quadras:
-            if quadra.identificador == identificador:
-                return quadra
+        return self.__quadras_DAO.get(identificador)

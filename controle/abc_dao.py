@@ -36,4 +36,4 @@ class DAO(ABC):
             pass
 
     def get_all(self):
-        return self.objectcache.values
+        return self.objectcache.values()
