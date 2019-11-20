@@ -3,6 +3,7 @@ from entidade.quadra import Quadra
 from entidade.cadastro_duplicado_exception import CadastroDuplicadoException
 from controle.quadra_dao import QuadraDAO
 
+
 class ControladorQuadra(AbstractControladorQuadra):
     from controle.controlador_principal import ControladorPrincipal
 
