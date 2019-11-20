@@ -1,6 +1,6 @@
-from limite.abstract_remove_quadra import AbstractRemoveQuadra
+from limite.abstract_sim_nao import AbstractSimNao
 
 
-class TelaRemoveQuadra(AbstractRemoveQuadra):
-    def __init__(self, nome_tela: str, texto_entradas: list, texto_botao: str):
-        super().__init__(nome_tela, texto_entradas, texto_botao)
+class TelaRemoveQuadra(AbstractSimNao):
+    def __init__(self, nome_tela: str, texto_confirmacao: str):
+        super().__init__(nome_tela, texto_confirmacao)

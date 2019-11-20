@@ -24,12 +24,18 @@ class ControladorPessoa(AbstractControladorPessoa):
     def add_pessoa(self):
         from limite.tela_add_edit_pessoa import TelaAddEditPessoa
         tela_add_pessoa = TelaAddEditPessoa('Cadastrar Usuário',
-                                        ['Nome', 'CPF', 'Telefone', 'E-mail'],
-                                        'Cadastrar')
+                                            ['Nome', 'CPF', 'Telefone', 'E-mail'],
+                                            'Cadastrar')
         nome, cpf, telefone, email = tela_add_pessoa.mostra_opcoes()
         try:
+            if (nome == "" or email == "" or
+                    len(cpf) != 11 or not cpf.isdigit()):
+                raise ValueError
+        except ValueError:
+            self.abre_tela_pessoa()
+        try:
             for pessoa in self.__lista_pessoas:
-                if pessoa.cpf == cpf:
+                if pessoa.nome == nome:
                     raise CadastroDuplicadoException
         except CadastroDuplicadoException:
             print("Pessoa já cadastrada.")
@@ -43,7 +49,7 @@ class ControladorPessoa(AbstractControladorPessoa):
 
     def remove_pessoa(self, nome: str):
         from limite.tela_remove_pessoa import TelaRemovePessoa
-        tela_confirmacao = TelaRemovePessoa('Tela Pessoa',
+        tela_confirmacao = TelaRemovePessoa('Remover Usuário',
                                             'Você tem certeza que deseja \n '
                                             'excluir esse cadastro?')
         confirmacao = tela_confirmacao.mostra_opcoes()
@@ -61,10 +67,10 @@ class ControladorPessoa(AbstractControladorPessoa):
 
     def edit_pessoa(self, nome_escolhido: str):
         from limite.tela_add_edit_pessoa import TelaAddEditPessoa
-        tela_add_pessoa = TelaAddEditPessoa('Editar Usuário',
-                                            ['Nome', 'CPF', 'Telefone', 'E-mail'],
-                                            'Cadastrar')
-        novo_nome, cpf, telefone, email = tela_add_pessoa.mostra_opcoes()
+        tela_edit_pessoa = TelaAddEditPessoa('Editar Usuário',
+                                             ['Nome', 'CPF', 'Telefone', 'E-mail'],
+                                             'Alterar Informações')
+        novo_nome, cpf, telefone, email = tela_edit_pessoa.mostra_opcoes()
         for pessoa in self.__lista_pessoas:
             if pessoa.nome == nome_escolhido:
                 if novo_nome != "":
@@ -79,12 +85,6 @@ class ControladorPessoa(AbstractControladorPessoa):
                         print("Telefone inválido.")
                 if email != "":
                     pessoa.email = email
-                print("INFORMAÇÕES ATUALIZADAS:\n "
-                      "CPF: {}\n "
-                      "Nome: {}\n "
-                      "Telefone: {}\n "
-                      "Email: {}".format(pessoa.cpf, pessoa.nome,
-                                         pessoa.telefone, pessoa.email))
                 self.abre_tela_pessoa()
         print("Usuário inexistente.")
         self.abre_tela_pessoa()
@@ -124,7 +124,10 @@ class ControladorPessoa(AbstractControladorPessoa):
         if escolha in [1, 5]:
             funcao_escolhida()
         else:
-            funcao_escolhida(nome[0][0])
+            try:
+                funcao_escolhida(nome[0][0])
+            except IndexError:
+                self.abre_tela_pessoa()
 
     def encontra_pessoa(self, cpf):
         for pessoa in self.__lista_pessoas:
