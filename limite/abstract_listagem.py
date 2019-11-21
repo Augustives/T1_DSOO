@@ -17,7 +17,7 @@ class AbstractListagem:
                   ]
         for i in range(len(texto_botoes)):
             layout.append([sg.Button(texto_botoes[i], size=(200, 4),
-                           button_color=('#000', '#7D7D7D'),
+                           button_color=('#000', '#5CBEFF'),
                            font=('Helvetica', 14), key=i+1)])
 
         self.__janela = sg.Window(self.__nome_tela, layout, size=(500, 700),

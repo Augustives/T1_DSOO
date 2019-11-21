@@ -10,8 +10,12 @@ class ControladorPessoa(AbstractControladorPessoa):
     def __init__(self, controlador_principal: ControladorPrincipal):
         from limite.tela_pessoa import TelaPessoa
         super().__init__()
-        self.__lista_pessoas = list()
+        self.__pessoas_DAO = PessoaDAO()
         self.__lista_nomes = list()
+        for pessoa in self.__pessoas_DAO.get_all():
+            lista = []
+            lista.append(pessoa.nome)
+            self.__lista_nomes.append(lista)
         self.__tela_pessoa = TelaPessoa(self, 'Tela Pessoa',
                                         ['Cadastrar Usuário', 'Remover Usuário',
                                          'Editar Usuário',
@@ -35,7 +39,7 @@ class ControladorPessoa(AbstractControladorPessoa):
         except ValueError:
             self.abre_tela_pessoa()
         try:
-            for pessoa in self.__lista_pessoas:
+            for pessoa in self.__pessoas_DAO.get_all():
                 if pessoa.nome == nome:
                     raise CadastroDuplicadoException
         except CadastroDuplicadoException:
@@ -43,8 +47,9 @@ class ControladorPessoa(AbstractControladorPessoa):
             self.abre_tela_pessoa()
 
         pessoa_incluida = Pessoa(nome, cpf, telefone, email)
-        self.__lista_pessoas.append(pessoa_incluida)
+        self.__pessoas_DAO.add(pessoa_incluida)
         self.__lista_nomes.append(pessoa_incluida.nome)
+        print(self.__pessoas_DAO.get_all(), self.__lista_nomes)
         print("Usuário cadastrado com sucesso.")
         self.abre_tela_pessoa()
 
@@ -55,10 +60,13 @@ class ControladorPessoa(AbstractControladorPessoa):
                                             'excluir esse cadastro?')
         confirmacao = tela_confirmacao.mostra_opcoes()
         if confirmacao == 1:
-            for pessoa in self.__lista_pessoas:
+            for pessoa in self.__pessoas_DAO.get_all():
                 if pessoa.nome == nome:
-                    self.__lista_pessoas.remove(pessoa)
-                    self.__lista_nomes.remove(pessoa.nome)
+                    self.__pessoas_DAO.remove(pessoa)
+                    for i in range(len(self.__lista_nomes)):
+                        if self.__lista_nomes[i][0] == nome:
+                            self.__lista_nomes.pop(i)
+
                     print("Usuário removido com sucesso.")
                     self.abre_tela_pessoa()
             print("Usuário inexistente.")

@@ -10,13 +10,19 @@ class ControladorQuadra(AbstractControladorQuadra):
     def __init__(self, controlador_principal: ControladorPrincipal):
         from limite.tela_quadra import TelaQuadra
         super().__init__()
-        self.__controlador_principal = controlador_principal
-        self.__lista_nomes = list()
-        self.__tela_quadra = TelaQuadra(self, 'Tela Quadra', ['Cadastrar Quadra', 'Excluir Quadra',
-                                                              'Editar Quadra', 'Voltar'],
-                                        self.__lista_nomes)
         self.__quadras_DAO = QuadraDAO()
-        self.__lista_quadras = []
+        self.__lista_nomes = list()
+        self.__controlador_principal = controlador_principal
+        for quadra in self.__quadras_DAO.get_all():
+            lista = []
+            lista.append(quadra.esporte)
+            lista.append(quadra.tipo)
+            lista.append(quadra.identificador)
+            self.__lista_nomes.append(lista)
+
+        self.__tela_quadra = TelaQuadra(self, 'Tela Quadra', ['Cadastrar Quadra', 'Excluir Quadra',
+                                                             'Editar Quadra', 'Voltar'],
+                                        self.__lista_nomes)
 
     def inicia(self):
         self.abre_tela_quadra()
@@ -43,7 +49,6 @@ class ControladorQuadra(AbstractControladorQuadra):
 
         quadra_nova = Quadra(esporte, tipo, identificador)
         self.__quadras_DAO.add(quadra_nova)
-        self.__lista_quadras.append(quadra_nova)
         self.__lista_nomes.append([quadra_nova.esporte, quadra_nova.tipo,
                                   quadra_nova.identificador])
         print("Quadra cadastrada com sucesso.")
@@ -51,18 +56,21 @@ class ControladorQuadra(AbstractControladorQuadra):
 
     def remove_quadra(self, info_quadra: list):
         info = info_quadra
-        print(info)
         from limite.tela_remove_quadra import TelaRemoveQuadra
         tela_confirmacao = TelaRemoveQuadra('Remover Quadra',
                                             'Você tem certeza que deseja \n '
                                             'excluir esse cadastro?')
         confirmacao = tela_confirmacao.mostra_opcoes()
         if confirmacao == 1:
-            for quadra in self.__lista_quadras:
+            for quadra in self.__quadras_DAO.get_all():
                 if quadra.identificador == info[2]:
-                    self.__lista_quadras.remove(quadra)
+                    self.__quadras_DAO.remove(info[2])
                     self.__lista_nomes.remove([quadra.esporte, quadra.tipo,
                                                quadra.identificador])
+                    for i in range(len(self.__lista_nomes)):
+                        if self.__lista_nomes[i][2] == info[2]:
+                            self.__lista_nomes.pop(i)
+
                     print("Quadra removida com sucesso.")
                     self.abre_tela_quadra()
             print("Quadra inexistente.")
