@@ -4,6 +4,7 @@ from entidade.cadastro_duplicado_exception import CadastroDuplicadoException
 from controle.quadra_dao import QuadraDAO
 from limite.tela_popup import Popup
 
+
 class ControladorQuadra(AbstractControladorQuadra):
     from controle.controlador_principal import ControladorPrincipal
 
