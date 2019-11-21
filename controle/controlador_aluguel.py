@@ -95,21 +95,49 @@ class ControladorAluguel(AbstractControladorAluguel):
             self.abre_tela_aluguel()
 
     def lista_aluguel_dia(self):
-        dia = self.__tela_aluguel.tela_lista_aluguel_dia()
+        from limite.tela_listar_por_dia import TelaListarPorDia
+        tela = TelaListarPorDia('Tela escolher dia',
+                                ['Dia desejado', 'Mês desejado'], 'Procurar')
+        dia, mes = tela.mostra_opcoes()
+        print(dia, mes)
+        alugueis_no_dia = list()
         for aluguel in self.__lista_alugueis:
-            if aluguel.dia == dia:
-                print("-"*30)
-                print(aluguel.pessoa.nome)
-                print(aluguel.pessoa.cpf)
-                print(aluguel.quadra.identificador)
-                print(aluguel.dia, "/", aluguel.mes, "às",
-                      aluguel.hora, "horas")
+            print(aluguel.dia, aluguel.mes)
+            if str(aluguel.dia) == str(dia) and str(aluguel.mes) == str(mes):
+                alugueis_no_dia.append([aluguel.quadra.esporte, aluguel.quadra.tipo,
+                                        aluguel.quadra.identificador, '-->',
+                                        aluguel.dia, '/', aluguel.mes, '-', aluguel.hora])
+
+        from limite.tela_dados_listagem import TelaDadosListagem
+        tela_dados_listagem = TelaDadosListagem('Aluguéis no dia {}/{}'.format(dia, mes),
+                                                alugueis_no_dia)
+        voltar = tela_dados_listagem.mostra_opcoes()
+        if voltar == 1 or voltar is None:
+            self.abre_tela_aluguel()
 
     def voltar(self):
         self.__controlador_principal.inicia()
 
-    def recibo(self, info_alguel):
-        self.abre_tela_aluguel()
+    def recibo(self, info_alguel: list):
+        info = info_alguel[0]
+        from limite.tela_dados_aluguel import TelaDadosAluguel
+        nome = None
+        for aluguel in self.__lista_alugueis:
+            if (aluguel.quadra.esporte == info[0] and
+                    aluguel.quadra.tipo == info[1] and
+                    aluguel.quadra.identificador == info[2] and
+                    aluguel.dia == info[4] and
+                    aluguel.mes == info[6] and
+                    aluguel.hora == info[8]):
+                nome = aluguel.pessoa.nome
+
+        tela_dados_aluguel = TelaDadosAluguel('Recibo de Aluguel',
+                                              ['Quadra {} {} {}'.format(info[0], info[1], info[2]),
+                                               'Alugada por ' + nome,
+                                               'Na data {}/{} às {}.'.format(info[4], info[6], info[8])])
+        voltar = tela_dados_aluguel.mostra_opcoes()
+        if voltar == 1 or voltar is None:
+            self.abre_tela_aluguel()
 
     @property
     def lista_nomes(self):

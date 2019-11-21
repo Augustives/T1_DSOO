@@ -52,6 +52,7 @@ class ControladorQuadra(AbstractControladorQuadra):
         self.__lista_nomes.append([quadra_nova.esporte, quadra_nova.tipo,
                                   quadra_nova.identificador])
         print("Quadra cadastrada com sucesso.")
+        print(self.__lista_quadras)
         self.abre_tela_quadra()
 
     def remove_quadra(self, info_quadra: list):
@@ -126,4 +127,6 @@ class ControladorQuadra(AbstractControladorQuadra):
                 self.abre_tela_quadra()
 
     def encontra_quadra(self, identificador):
-        return self.__quadras_DAO.get(identificador)
+        for quadra in self.__lista_quadras:
+            if quadra.identificador == identificador:
+                return quadra
