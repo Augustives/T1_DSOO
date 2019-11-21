@@ -1,6 +1,7 @@
 from controle.abstract_controlador_principal import AbstractControladorPrincipal
 import sys
 
+
 class ControladorPrincipal(AbstractControladorPrincipal):
     def __init__(self):
         from limite.tela_inicial import TelaInicial
