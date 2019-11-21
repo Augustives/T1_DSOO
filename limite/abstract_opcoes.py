@@ -25,6 +25,8 @@ class AbstractOpcoes:
         self.__janela.Close()
         return button
 
+    def fechar(self):
+        self.__janela.Close()
 
 
 

@@ -94,7 +94,6 @@ class ControladorAluguel(AbstractControladorAluguel):
         else:
             self.abre_tela_aluguel()
 
-
     def lista_aluguel_dia(self):
         dia = self.__tela_aluguel.tela_lista_aluguel_dia()
         for aluguel in self.__lista_alugueis:

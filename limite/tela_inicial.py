@@ -8,4 +8,3 @@ class TelaInicial(AbstractOpcoes):
                  nome_tela: str, texto_botoes: list):
         super().__init__(nome_tela, texto_botoes)
         self.__controlador = controlador
-

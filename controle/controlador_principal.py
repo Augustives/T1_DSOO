@@ -1,5 +1,5 @@
 from controle.abstract_controlador_principal import AbstractControladorPrincipal
-
+import sys
 
 class ControladorPrincipal(AbstractControladorPrincipal):
     def __init__(self):
@@ -24,6 +24,8 @@ class ControladorPrincipal(AbstractControladorPrincipal):
                     3: self.vai_controlador_aluguel}
 
         escolha = self.__tela_inicial.mostra_opcoes()
+        if escolha is None:
+            sys.exit()
         funcao_escolhida = escolhas[escolha]
         funcao_escolhida()
 

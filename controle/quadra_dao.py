@@ -3,6 +3,7 @@ from controle.abc_dao import DAO
 
 class QuadraDAO(DAO):
     from entidade.quadra import Quadra
+
     def __init__(self):
         super().__init__("quadra.pkl")
 

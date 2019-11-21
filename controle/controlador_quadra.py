@@ -51,6 +51,7 @@ class ControladorQuadra(AbstractControladorQuadra):
 
     def remove_quadra(self, info_quadra: list):
         info = info_quadra
+        print(info)
         from limite.tela_remove_quadra import TelaRemoveQuadra
         tela_confirmacao = TelaRemoveQuadra('Remover Quadra',
                                             'Você tem certeza que deseja \n '
