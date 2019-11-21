@@ -80,8 +80,12 @@ class ControladorPessoa(AbstractControladorPessoa):
                                              ['Nome', 'CPF', 'Telefone', 'E-mail'],
                                              'Alterar Informações')
         novo_nome, cpf, telefone, email = tela_edit_pessoa.mostra_opcoes()
-        for pessoa in self.__lista_pessoas:
-            if pessoa.nome == nome_escolhido:
+        print(self.__pessoas_DAO.get_all())
+        for pessoa in self.__pessoas_DAO.get_all():
+            print(pessoa.nome)
+            print(nome_escolhido)
+            if pessoa.nome == nome_escolhido[0]:
+                pessoa_antiga = pessoa
                 if novo_nome != "":
                     pessoa.nome = novo_nome
                     self.__lista_nomes[self.__lista_nomes.index(nome_escolhido)] \
@@ -94,13 +98,15 @@ class ControladorPessoa(AbstractControladorPessoa):
                         print("Telefone inválido.")
                 if email != "":
                     pessoa.email = email
+                pessoa_nova = pessoa
+                self.__pessoas_DAO.edit(pessoa_antiga, pessoa_nova)
                 self.abre_tela_pessoa()
         print("Usuário inexistente.")
         self.abre_tela_pessoa()
 
     def dados_pessoa(self, nome: str):
         from limite.tela_dados_pessoa import TelaDadosPessoa
-        for pessoa in self.__lista_pessoas:
+        for pessoa in self.__pessoas_DAO.get_all():
             if pessoa.nome == nome:
                 tela_dados_pessoa = TelaDadosPessoa('Dados do Usuário',
                                                     [pessoa.nome, pessoa.cpf,
@@ -113,7 +119,7 @@ class ControladorPessoa(AbstractControladorPessoa):
 
     @property
     def lista_pessoas(self):
-        return self.__lista_pessoas
+        return self.__pessoas_DAO.get_all()
 
     @property
     def lista_nomes(self):
@@ -139,6 +145,6 @@ class ControladorPessoa(AbstractControladorPessoa):
                 self.abre_tela_pessoa()
 
     def encontra_pessoa(self, nome):
-        for pessoa in self.__lista_pessoas:
+        for pessoa in self.__pessoas_DAO.get_all():
             if pessoa.nome == nome:
                 return pessoa

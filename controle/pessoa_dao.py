@@ -16,3 +16,6 @@ class PessoaDAO(DAO):
     def remove(self, key):
             super().remove(key)
 
+    def edit(self, pessoa_antiga: Pessoa, pessoa_nova: Pessoa):
+        super().remove(pessoa_antiga.cpf)
+        super().add(pessoa_nova.cpf, pessoa_nova)
