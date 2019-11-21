@@ -13,10 +13,10 @@ class AbstractSimNao:
         layout = [[sg.Txt(texto_confirmacao, font=('Helvetica', 14), size=(200, 3),
                           justification="center")],
                   [sg.Button('Sim', size=(200, 4),
-                             button_color=('#000', '#7D7D7D'),
+                             button_color=('#000', '#5CBEFF'),
                              font=('Helvetica', 14), key=1)],
                   [sg.Button('Não', size=(200, 4),
-                             button_color=('#000', '#7D7D7D'),
+                             button_color=('#000', '#5CBEFF'),
                              font=('Helvetica', 14), key=2)]
                   ]
 

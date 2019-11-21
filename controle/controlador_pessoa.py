@@ -3,6 +3,7 @@ from entidade.cadastro_duplicado_exception import CadastroDuplicadoException
 from entidade.telefone_invalido_excepion import TelefoneInvalidoException
 from controle.abstract_controlador_pessoa import AbstractControladorPessoa
 from controle.pessoa_dao import PessoaDAO
+from limite.tela_popup import Popup
 
 
 class ControladorPessoa(AbstractControladorPessoa):
@@ -50,6 +51,7 @@ class ControladorPessoa(AbstractControladorPessoa):
                     raise CadastroDuplicadoException
         except CadastroDuplicadoException:
             print("Pessoa já cadastrada.")
+            Popup('Pessoa já cadastrada.')
             self.abre_tela_pessoa()
 
         pessoa_incluida = Pessoa(nome, cpf, telefone, email)
@@ -57,6 +59,7 @@ class ControladorPessoa(AbstractControladorPessoa):
         self.__lista_nomes.append(pessoa_incluida.nome)
         print(self.__pessoas_DAO.get_all(), self.__lista_nomes)
         print("Usuário cadastrado com sucesso.")
+        Popup('Usuário cadastrado com sucesso.')
         self.abre_tela_pessoa()
 
     def remove_pessoa(self, nome: str):
@@ -75,8 +78,10 @@ class ControladorPessoa(AbstractControladorPessoa):
                     print(self.__pessoas_DAO.get_all())
                     self.lista_nomes.remove(pessoa.nome)
                     print("Usuário removido com sucesso.")
+                    Popup('Usuário removido com sucesso.')
                     self.abre_tela_pessoa()
             print("Usuário inexistente.")
+            Popup('Usuário inexistente.')
             self.abre_tela_pessoa()
         else:
             self.abre_tela_pessoa()
@@ -87,6 +92,7 @@ class ControladorPessoa(AbstractControladorPessoa):
                                              ['Nome', 'CPF', 'Telefone', 'E-mail'],
                                              'Alterar Informações')
         novo_nome, cpf, telefone, email = tela_edit_pessoa.mostra_opcoes()
+        print(self.__pessoas_DAO.get_all())
         for pessoa in self.__pessoas_DAO.get_all():
             print(pessoa.nome)
             print(nome_escolhido)
@@ -103,6 +109,7 @@ class ControladorPessoa(AbstractControladorPessoa):
                         pessoa.telefone = int(telefone)
                     except TelefoneInvalidoException:
                         print("Telefone inválido.")
+                        Popup('Telefone inválido.')
                         self.abre_tela_pessoa()
                 if email != "":
                     pessoa.email = email
@@ -110,6 +117,7 @@ class ControladorPessoa(AbstractControladorPessoa):
                 self.__pessoas_DAO.edit(pessoa_antiga, pessoa_nova)
                 self.abre_tela_pessoa()
         print("Usuário inexistente.")
+        Popup('Usuário inexistente.')
         self.abre_tela_pessoa()
 
     def dados_pessoa(self, nome: str):
@@ -123,6 +131,7 @@ class ControladorPessoa(AbstractControladorPessoa):
                 if voltar == 1:
                     self.abre_tela_pessoa()
         print("Usuário inexistente.")
+        Popup('Usuário inexistente.')
         self.abre_tela_pessoa()
 
     @property
