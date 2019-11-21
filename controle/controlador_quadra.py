@@ -2,7 +2,7 @@ from controle.abstract_controlador_quadra import AbstractControladorQuadra
 from entidade.quadra import Quadra
 from entidade.cadastro_duplicado_exception import CadastroDuplicadoException
 from controle.quadra_dao import QuadraDAO
-
+from limite.tela_popup import Popup
 
 class ControladorQuadra(AbstractControladorQuadra):
     from controle.controlador_principal import ControladorPrincipal
@@ -39,9 +39,11 @@ class ControladorQuadra(AbstractControladorQuadra):
                     raise CadastroDuplicadoException
         except CadastroDuplicadoException:
             print("Quadra já cadastrada.")
+            Popup('Quadra já cadastrada.')
             self.abre_tela_quadra()
         except ValueError:
             print('Valores Inválidos.')
+            Popup('Valores Inválidos.')
             self.abre_tela_quadra()
 
         quadra_nova = Quadra(esporte, tipo, identificador)
@@ -49,6 +51,7 @@ class ControladorQuadra(AbstractControladorQuadra):
         self.__lista_nomes.append([quadra_nova.esporte, quadra_nova.tipo,
                                   quadra_nova.identificador])
         print("Quadra cadastrada com sucesso.")
+        Popup("Quadra cadastrada com sucesso.")
         self.abre_tela_quadra()
 
     def remove_quadra(self, info_quadra: list):
@@ -69,8 +72,10 @@ class ControladorQuadra(AbstractControladorQuadra):
                             self.__lista_nomes.pop(i)
 
                     print("Quadra removida com sucesso.")
+                    Popup('Quadra removida com sucesso')
                     self.abre_tela_quadra()
             print("Quadra inexistente.")
+            Popup('Quadra inexistente')
             self.abre_tela_quadra()
         else:
             self.abre_tela_quadra()
@@ -97,6 +102,7 @@ class ControladorQuadra(AbstractControladorQuadra):
                 self.__quadras_DAO.edit(quadra_antiga, quadra_alterada)
                 self.abre_tela_quadra()
         print("Quadra inexistente.")
+        Popup('Quadra inexistente.')
         self.abre_tela_quadra()
 
     @property
