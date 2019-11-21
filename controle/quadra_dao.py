@@ -16,3 +16,6 @@ class QuadraDAO(DAO):
     def remove(self, key):
             super().remove(key)
 
+    def edit(self, quadra_antiga: Quadra, quadra_nova: Quadra):
+        super().remove(quadra_antiga.identificador)
+        super().add(quadra_nova.identificador, quadra_nova)

@@ -14,10 +14,7 @@ class ControladorQuadra(AbstractControladorQuadra):
         self.__lista_nomes = list()
         self.__controlador_principal = controlador_principal
         for quadra in self.__quadras_DAO.get_all():
-            lista = []
-            lista.append(quadra.esporte)
-            lista.append(quadra.tipo)
-            lista.append(quadra.identificador)
+            lista = [quadra.esporte, quadra.tipo, quadra.identificador]
             self.__lista_nomes.append(lista)
 
         self.__tela_quadra = TelaQuadra(self, 'Tela Quadra', ['Cadastrar Quadra', 'Excluir Quadra',
@@ -85,16 +82,19 @@ class ControladorQuadra(AbstractControladorQuadra):
                                              'Alterar Informações')
         esporte, tipo, identificador = tela_edit_quadra.mostra_opcoes()
         for quadra in self.__quadras_DAO.get_all():
-            if quadra.identificador == info_quadra[2]:
+            if str(quadra.identificador) == str(info_quadra[2]):
                 info_antiga = [quadra.esporte, quadra.tipo, quadra.identificador]
+                quadra_antiga = quadra
                 if esporte != "":
                     quadra.esporte = esporte
                 if tipo != "":
                     quadra.tipo = tipo
                 if identificador != "":
                     quadra.identificador = identificador
+                quadra_alterada = quadra
                 self.__lista_nomes[self.__lista_nomes.index(info_antiga)] \
                     = [quadra.esporte, quadra.tipo, quadra.identificador]
+                self.__quadras_DAO.edit(quadra_antiga, quadra_alterada)
                 self.abre_tela_quadra()
         print("Quadra inexistente.")
         self.abre_tela_quadra()
