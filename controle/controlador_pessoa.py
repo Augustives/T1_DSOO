@@ -46,6 +46,8 @@ class ControladorPessoa(AbstractControladorPessoa):
         self.__lista_pessoas.append(pessoa_incluida)
         self.__lista_nomes.append(pessoa_incluida.nome)
         print("Usuário cadastrado com sucesso.")
+        print(self.__lista_pessoas)
+        print(self.__lista_nomes)
         self.abre_tela_pessoa()
 
     def remove_pessoa(self, nome: str):

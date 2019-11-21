@@ -19,7 +19,7 @@ class AbstractControladorAluguel(ABC):
         pass
 
     @abstractmethod
-    def lista_aluguel_dia(self, info_aluguel: list):
+    def lista_aluguel_dia(self):
         pass
 
     @abstractmethod
