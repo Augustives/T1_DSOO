@@ -2,7 +2,7 @@ from entidade.abstract_pessoa import AbstractPessoa
 
 
 class Pessoa(AbstractPessoa):
-    def __init__(self, nome: str, cpf: str, telefone: int, email: str):
+    def __init__(self, nome: str, cpf: str, telefone: str, email: str):
         super().__init__()
         self.__nome = nome
         self.__cpf = cpf

@@ -11,10 +11,10 @@ class PessoaDAO(DAO):
             super().add(pessoa.cpf, pessoa)
 
     def get(self, key):
-            return super().get(key)
+        return super().get(key)
 
     def remove(self, key):
-            super().remove(key)
+        super().remove(key)
 
     def edit(self, pessoa_antiga: Pessoa, pessoa_nova: Pessoa):
         super().remove(pessoa_antiga.cpf)

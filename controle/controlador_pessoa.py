@@ -1,5 +1,6 @@
 from entidade.pessoa import Pessoa
 from entidade.cadastro_duplicado_exception import CadastroDuplicadoException
+from entidade.telefone_invalido_excepion import TelefoneInvalidoException
 from controle.abstract_controlador_pessoa import AbstractControladorPessoa
 from controle.pessoa_dao import PessoaDAO
 
@@ -13,8 +14,7 @@ class ControladorPessoa(AbstractControladorPessoa):
         self.__pessoas_DAO = PessoaDAO()
         self.__lista_nomes = list()
         for pessoa in self.__pessoas_DAO.get_all():
-            lista = []
-            lista.append(pessoa.nome)
+            lista = pessoa.nome
             self.__lista_nomes.append(lista)
         self.__tela_pessoa = TelaPessoa(self, 'Tela Pessoa',
                                         ['Cadastrar Usuário', 'Remover Usuário',
@@ -32,15 +32,21 @@ class ControladorPessoa(AbstractControladorPessoa):
                                             ['Nome', 'CPF', 'Telefone', 'E-mail'],
                                             'Cadastrar')
         nome, cpf, telefone, email = tela_add_pessoa.mostra_opcoes()
+        print(nome, cpf, telefone, email)
         try:
             if (nome == "" or email == "" or
                     len(cpf) != 11 or not cpf.isdigit()):
                 raise ValueError
+            if not telefone.isdigit():
+                raise TelefoneInvalidoException
         except ValueError:
+            self.abre_tela_pessoa()
+        except TelefoneInvalidoException:
+            print('Telefone Inválido')
             self.abre_tela_pessoa()
         try:
             for pessoa in self.__pessoas_DAO.get_all():
-                if pessoa.nome == nome:
+                if pessoa.nome == nome or pessoa.cpf == cpf:
                     raise CadastroDuplicadoException
         except CadastroDuplicadoException:
             print("Pessoa já cadastrada.")
@@ -59,14 +65,15 @@ class ControladorPessoa(AbstractControladorPessoa):
                                             'Você tem certeza que deseja \n '
                                             'excluir esse cadastro?')
         confirmacao = tela_confirmacao.mostra_opcoes()
+        print(self.__lista_nomes)
         if confirmacao == 1:
             for pessoa in self.__pessoas_DAO.get_all():
+                print(pessoa.nome)
                 if pessoa.nome == nome:
+                    print(self.__pessoas_DAO.get_all())
                     self.__pessoas_DAO.remove(pessoa.cpf)
-                    for nomes in self.__lista_nomes:
-                        if nomes == nome:
-                            self.__lista_nomes.remove(nomes)
-
+                    print(self.__pessoas_DAO.get_all())
+                    self.lista_nomes.remove(pessoa.nome)
                     print("Usuário removido com sucesso.")
                     self.abre_tela_pessoa()
             print("Usuário inexistente.")
@@ -80,11 +87,10 @@ class ControladorPessoa(AbstractControladorPessoa):
                                              ['Nome', 'CPF', 'Telefone', 'E-mail'],
                                              'Alterar Informações')
         novo_nome, cpf, telefone, email = tela_edit_pessoa.mostra_opcoes()
-        print(self.__pessoas_DAO.get_all())
         for pessoa in self.__pessoas_DAO.get_all():
             print(pessoa.nome)
             print(nome_escolhido)
-            if pessoa.nome == nome_escolhido[0]:
+            if pessoa.nome == nome_escolhido:
                 pessoa_antiga = pessoa
                 if novo_nome != "":
                     pessoa.nome = novo_nome
@@ -92,10 +98,12 @@ class ControladorPessoa(AbstractControladorPessoa):
                         = novo_nome
                 if telefone != "":
                     try:
-                        telefone = int(telefone)
-                        pessoa.telefone = telefone
-                    except ValueError:
+                        if not telefone.isdigit():
+                            raise TelefoneInvalidoException
+                        pessoa.telefone = int(telefone)
+                    except TelefoneInvalidoException:
                         print("Telefone inválido.")
+                        self.abre_tela_pessoa()
                 if email != "":
                     pessoa.email = email
                 pessoa_nova = pessoa

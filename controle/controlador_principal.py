@@ -50,3 +50,7 @@ class ControladorPrincipal(AbstractControladorPrincipal):
 
     def lista_info_quadras(self):
         return self.__controlador_quadra.lista_nomes
+
+    @property
+    def controlador_pessoa(self):
+        return self.__controlador_pessoa

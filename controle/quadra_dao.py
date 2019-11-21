@@ -11,10 +11,10 @@ class QuadraDAO(DAO):
             super().add(quadra.identificador, quadra)
 
     def get(self, key: int):
-            return super().get(key)
+        return super().get(key)
 
     def remove(self, key):
-            super().remove(key)
+        super().remove(key)
 
     def edit(self, quadra_antiga: Quadra, quadra_nova: Quadra):
         super().remove(quadra_antiga.identificador)
