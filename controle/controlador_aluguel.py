@@ -1,7 +1,7 @@
 from controle.abstract_controlador_aluguel import AbstractControladorAluguel
 from entidade.aluguel import Aluguel
 from entidade.cadastro_duplicado_exception import CadastroDuplicadoException
-
+from controle.aluguel_dao import AlugelDAO
 
 class ControladorAluguel(AbstractControladorAluguel):
     from controle.controlador_principal import ControladorPrincipal
@@ -9,6 +9,7 @@ class ControladorAluguel(AbstractControladorAluguel):
     def __init__(self, controlador_principal: ControladorPrincipal):
         from limite.tela_aluguel import TelaAluguel
         super().__init__()
+        self.__aluguel_DAO = AlugelDAO()
         self.__lista_alugueis = list()
         self.__lista_nomes = list()
         self.__tela_aluguel = TelaAluguel(self, 'Tela Aluguel',
