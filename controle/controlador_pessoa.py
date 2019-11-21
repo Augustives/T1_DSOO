@@ -51,8 +51,6 @@ class ControladorPessoa(AbstractControladorPessoa):
         self.__lista_nomes.append(pessoa_incluida.nome)
         print(self.__pessoas_DAO.get_all(), self.__lista_nomes)
         print("Usuário cadastrado com sucesso.")
-        print(self.__lista_pessoas)
-        print(self.__lista_nomes)
         self.abre_tela_pessoa()
 
     def remove_pessoa(self, nome: str):
@@ -64,10 +62,10 @@ class ControladorPessoa(AbstractControladorPessoa):
         if confirmacao == 1:
             for pessoa in self.__pessoas_DAO.get_all():
                 if pessoa.nome == nome:
-                    self.__pessoas_DAO.remove(pessoa)
-                    for i in range(len(self.__lista_nomes)):
-                        if self.__lista_nomes[i][0] == nome:
-                            self.__lista_nomes.pop(i)
+                    self.__pessoas_DAO.remove(pessoa.cpf)
+                    for nomes in self.__lista_nomes:
+                        if nomes == nome:
+                            self.__lista_nomes.remove(nomes)
 
                     print("Usuário removido com sucesso.")
                     self.abre_tela_pessoa()
