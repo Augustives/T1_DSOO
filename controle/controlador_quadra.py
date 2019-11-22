@@ -31,7 +31,9 @@ class ControladorQuadra(AbstractControladorQuadra):
                                             ['Esporte', 'Tipo', 'Identificador'],
                                             'Cadastrar')
         esporte, tipo, identificador = tela_add_quadra.mostra_opcoes()
-
+        print(esporte, tipo, identificador)
+        if esporte is None and tipo is None and identificador is None:
+            self.abre_tela_quadra()
         try:
             if esporte == "" or tipo == "" or int(identificador) <= 0:
                 raise ValueError
@@ -87,6 +89,8 @@ class ControladorQuadra(AbstractControladorQuadra):
                                              ['Esporte', 'Tipo', 'Identificador'],
                                              'Alterar Informações')
         esporte, tipo, identificador = tela_edit_quadra.mostra_opcoes()
+        if esporte is None and tipo is None and identificador is None:
+            self.abre_tela_quadra()
         for quadra in self.__quadras_DAO.get_all():
             if str(quadra.identificador) == str(info_quadra[2]):
                 info_antiga = [quadra.esporte, quadra.tipo, quadra.identificador]

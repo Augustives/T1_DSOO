@@ -43,4 +43,7 @@ class TelaAddAluguel:
         button, dict_valores = self.__janela.Read()
         self.__janela.Close()
         usuario, quadra, mes, dia, horario = dict_valores.values()
+        if (usuario is None and quadra is None
+                and mes is None and dia is None and horario is None):
+            return None, None, None, None, None
         return usuario[0], quadra[0], mes[0], dia[0], horario[0]

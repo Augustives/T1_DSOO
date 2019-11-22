@@ -34,6 +34,8 @@ class ControladorPessoa(AbstractControladorPessoa):
                                             'Cadastrar')
         nome, cpf, telefone, email = tela_add_pessoa.mostra_opcoes()
         print(nome, cpf, telefone, email)
+        if nome is None and cpf is None and telefone is None and email is None:
+            self.abre_tela_pessoa()
         try:
             if (nome == "" or email == "" or
                     len(cpf) != 11 or not cpf.isdigit()):
@@ -92,6 +94,8 @@ class ControladorPessoa(AbstractControladorPessoa):
                                              ['Nome', 'CPF', 'Telefone', 'E-mail'],
                                              'Alterar Informações')
         novo_nome, cpf, telefone, email = tela_edit_pessoa.mostra_opcoes()
+        if novo_nome is None and cpf is None and telefone is None and email is None:
+            self.abre_tela_pessoa()
         print(self.__pessoas_DAO.get_all())
         for pessoa in self.__pessoas_DAO.get_all():
             print(pessoa.nome)
@@ -128,7 +132,7 @@ class ControladorPessoa(AbstractControladorPessoa):
                                                     [pessoa.nome, pessoa.cpf,
                                                      pessoa.telefone, pessoa.email])
                 voltar = tela_dados_pessoa.mostra_opcoes()
-                if voltar == 1:
+                if voltar == 1 or voltar is None:
                     self.abre_tela_pessoa()
         print("Usuário inexistente.")
         Popup('Usuário inexistente.')
@@ -151,7 +155,7 @@ class ControladorPessoa(AbstractControladorPessoa):
                     4: self.dados_pessoa, 5: self.voltar}
         escolha, nome = self.__tela_pessoa.mostra_opcoes()
         if escolha is None:
-            escolha = 6
+            escolha = 5
         funcao_escolhida = escolhas[escolha]
         if escolha in [1, 5]:
             funcao_escolhida()

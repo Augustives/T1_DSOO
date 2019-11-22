@@ -49,6 +49,9 @@ class ControladorAluguel(AbstractControladorAluguel):
                                           self.__controlador_principal.lista_info_quadras())
         nome_usuario, quadra, mes, dia, hora = tela_add_aluguel.mostra_opcoes()
         print(nome_usuario, quadra, mes, dia, hora)
+        if (nome_usuario is None and quadra is None
+                and mes is None and dia is None and hora is None):
+            self.abre_tela_aluguel()
         try:
             quadra_escolhida = self.__controlador_principal.encontra_quadra(quadra[2])
             pessoa_escolhida = self.__controlador_principal.encontra_pessoa(nome_usuario)
@@ -107,6 +110,8 @@ class ControladorAluguel(AbstractControladorAluguel):
         tela = TelaListarPorDia('Tela escolher dia',
                                 ['Dia desejado', 'Mês desejado'], 'Procurar')
         dia, mes = tela.mostra_opcoes()
+        if dia is None and mes is None:
+            self.abre_tela_aluguel()
         print(dia, mes)
         alugueis_no_dia = list()
         for aluguel in self.__aluguel_DAO.get_all():
