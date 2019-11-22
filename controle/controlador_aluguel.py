@@ -51,7 +51,7 @@ class ControladorAluguel(AbstractControladorAluguel):
         print(nome_usuario, quadra, mes, dia, hora)
         try:
             quadra_escolhida = self.__controlador_principal.encontra_quadra(quadra[2])
-            pessoa_escolhida = self.__controlador_principal.controlador_pessoa.encontra_pessoa(nome_usuario)
+            pessoa_escolhida = self.__controlador_principal.encontra_pessoa(nome_usuario)
             print(quadra_escolhida)
             print(pessoa_escolhida)
             print(nome_usuario)
