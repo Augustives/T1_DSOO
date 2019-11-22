@@ -1,4 +1,4 @@
-from controle.abc_dao import DAO
+from entidade.abc_dao import DAO
 from entidade.pessoa import Pessoa
 
 

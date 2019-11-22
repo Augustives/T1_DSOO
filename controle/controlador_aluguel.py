@@ -1,7 +1,7 @@
 from controle.abstract_controlador_aluguel import AbstractControladorAluguel
 from entidade.aluguel import Aluguel
 from entidade.cadastro_duplicado_exception import CadastroDuplicadoException
-from controle.aluguel_dao import AlugelDAO
+from entidade.aluguel_dao import AlugelDAO
 from limite.tela_popup import Popup
 
 

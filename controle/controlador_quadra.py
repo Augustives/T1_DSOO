@@ -1,7 +1,7 @@
 from controle.abstract_controlador_quadra import AbstractControladorQuadra
 from entidade.quadra import Quadra
 from entidade.cadastro_duplicado_exception import CadastroDuplicadoException
-from controle.quadra_dao import QuadraDAO
+from entidade.quadra_dao import QuadraDAO
 from limite.tela_popup import Popup
 
 

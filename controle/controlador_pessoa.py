@@ -2,7 +2,7 @@ from entidade.pessoa import Pessoa
 from entidade.cadastro_duplicado_exception import CadastroDuplicadoException
 from entidade.telefone_invalido_excepion import TelefoneInvalidoException
 from controle.abstract_controlador_pessoa import AbstractControladorPessoa
-from controle.pessoa_dao import PessoaDAO
+from entidade.pessoa_dao import PessoaDAO
 from limite.tela_popup import Popup
 
 
