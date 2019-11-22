@@ -27,7 +27,3 @@ class AbstractOpcoes:
 
     def fechar(self):
         self.__janela.Close()
-
-
-
-

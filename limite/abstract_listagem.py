@@ -28,5 +28,3 @@ class AbstractListagem:
         button, values = self.__janela.Read()
         self.__janela.Close()
         return button, values
-
-

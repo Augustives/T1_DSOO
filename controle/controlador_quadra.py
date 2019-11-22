@@ -19,7 +19,7 @@ class ControladorQuadra(AbstractControladorQuadra):
             self.__lista_nomes.append(lista)
 
         self.__tela_quadra = TelaQuadra(self, 'Tela Quadra', ['Cadastrar Quadra', 'Excluir Quadra',
-                                                             'Editar Quadra', 'Voltar'],
+                                                              'Editar Quadra', 'Voltar'],
                                         self.__lista_nomes)
 
     def inicia(self):

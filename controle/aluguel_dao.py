@@ -26,7 +26,3 @@ class AlugelDAO(DAO):
                                                           aluguel.dia,
                                                           aluguel.mes,
                                                           aluguel.hora))
-
-
-
-#Vamo precisar de uma key pros alugueis, ai tem q ver se numeramos eles, ou fazemos a key com oq
