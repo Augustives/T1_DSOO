@@ -42,8 +42,10 @@ class ControladorPessoa(AbstractControladorPessoa):
             if not telefone.isdigit():
                 raise TelefoneInvalidoException
         except ValueError:
+            Popup('Valores inválidos.')
             self.abre_tela_pessoa()
         except TelefoneInvalidoException:
+            Popup('Telefone oferecido inválido.')
             self.abre_tela_pessoa()
         try:
             for pessoa in self.__pessoas_DAO.get_all():
