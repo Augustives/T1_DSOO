@@ -2,6 +2,7 @@ from controle.abstract_controlador_aluguel import AbstractControladorAluguel
 from entidade.aluguel import Aluguel
 from entidade.cadastro_duplicado_exception import CadastroDuplicadoException
 from controle.aluguel_dao import AlugelDAO
+from limite.tela_popup import Popup
 
 
 class ControladorAluguel(AbstractControladorAluguel):
@@ -48,16 +49,12 @@ class ControladorAluguel(AbstractControladorAluguel):
                                           self.__controlador_principal.lista_nomes_pessoas(),
                                           self.__controlador_principal.lista_info_quadras())
         nome_usuario, quadra, mes, dia, hora = tela_add_aluguel.mostra_opcoes()
-        print(nome_usuario, quadra, mes, dia, hora)
         if (nome_usuario is None and quadra is None
                 and mes is None and dia is None and hora is None):
             self.abre_tela_aluguel()
         try:
             quadra_escolhida = self.__controlador_principal.encontra_quadra(quadra[2])
             pessoa_escolhida = self.__controlador_principal.encontra_pessoa(nome_usuario)
-            print(quadra_escolhida)
-            print(pessoa_escolhida)
-            print(nome_usuario)
             if quadra_escolhida is None or pessoa_escolhida is None:
                 raise ValueError
             for aluguel in self.__aluguel_DAO.get_all():
@@ -66,10 +63,10 @@ class ControladorAluguel(AbstractControladorAluguel):
                         aluguel.mes == mes and aluguel.hora == hora):
                     raise CadastroDuplicadoException
         except CadastroDuplicadoException:
-            print("Aluguel indisponível no horário desejado.")
+            Popup('Aluguel indisponível no horário desejado.')
             self.abre_tela_aluguel()
         except ValueError:
-            print("Quadra ou pessoa inexistentes.")
+            Popup('Quadra ou pessoa inexistentes.')
             self.abre_tela_aluguel()
 
         aluguel_marcado = Aluguel(self.__controlador_principal.encontra_pessoa(nome_usuario),
@@ -78,7 +75,7 @@ class ControladorAluguel(AbstractControladorAluguel):
         self.__aluguel_DAO.add(aluguel_marcado)
         self.__lista_nomes.append([quadra[0], quadra[1], quadra[2], '-->',
                                    dia, '/', mes, '-', hora])
-        print("Aluguel cadastrado com sucesso.")
+        Popup('Aluguel cadastrado com sucesso.')
         self.abre_tela_aluguel()
 
     def remove_aluguel(self, info_aluguel: list):
@@ -88,7 +85,6 @@ class ControladorAluguel(AbstractControladorAluguel):
                                              'Você tem certeza que deseja \n '
                                              'cancelar esse aluguel?')
         confirmacao = tela_confirmacao.mostra_opcoes()
-        print(info)
         if confirmacao == 1:
             quadra_alugada = self.__controlador_principal.encontra_quadra(info[2])
             for aluguel in self.__aluguel_DAO.get_all():
@@ -98,9 +94,9 @@ class ControladorAluguel(AbstractControladorAluguel):
                     self.__aluguel_DAO.remove(aluguel)
                     self.__lista_nomes.remove([info[0], info[1], info[2], '-->',
                                                info[4], '/', info[6], '-', info[8]])
-                    print("Aluguel cancelado com sucesso.")
+                    Popup('Aluguel cancelado com sucesso.')
                     self.abre_tela_aluguel()
-            print("Aluguel inexistente.")
+            Popup('Aluguel inexistente')
             self.abre_tela_aluguel()
         else:
             self.abre_tela_aluguel()
@@ -112,10 +108,8 @@ class ControladorAluguel(AbstractControladorAluguel):
         dia, mes = tela.mostra_opcoes()
         if dia is None and mes is None:
             self.abre_tela_aluguel()
-        print(dia, mes)
         alugueis_no_dia = list()
         for aluguel in self.__aluguel_DAO.get_all():
-            print(aluguel.dia, aluguel.mes)
             if str(aluguel.dia) == str(dia) and str(aluguel.mes) == str(mes):
                 alugueis_no_dia.append([aluguel.quadra.esporte, aluguel.quadra.tipo,
                                         aluguel.quadra.identificador, '-->',
@@ -133,11 +127,9 @@ class ControladorAluguel(AbstractControladorAluguel):
 
     def recibo(self, info_alguel: list):
         info = info_alguel[0]
-        print(info)
         from limite.tela_dados_aluguel import TelaDadosAluguel
         nome = None
         for aluguel in self.__aluguel_DAO.get_all():
-            print(aluguel.pessoa)
             if (aluguel.quadra.esporte == info[0] and
                     aluguel.quadra.tipo == info[1] and
                     aluguel.quadra.identificador == info[2] and

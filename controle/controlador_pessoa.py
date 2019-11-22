@@ -33,7 +33,6 @@ class ControladorPessoa(AbstractControladorPessoa):
                                             ['Nome', 'CPF', 'Telefone', 'E-mail'],
                                             'Cadastrar')
         nome, cpf, telefone, email = tela_add_pessoa.mostra_opcoes()
-        print(nome, cpf, telefone, email)
         if nome is None and cpf is None and telefone is None and email is None:
             self.abre_tela_pessoa()
         try:
@@ -45,22 +44,18 @@ class ControladorPessoa(AbstractControladorPessoa):
         except ValueError:
             self.abre_tela_pessoa()
         except TelefoneInvalidoException:
-            print('Telefone Inválido')
             self.abre_tela_pessoa()
         try:
             for pessoa in self.__pessoas_DAO.get_all():
                 if pessoa.nome == nome or pessoa.cpf == cpf:
                     raise CadastroDuplicadoException
         except CadastroDuplicadoException:
-            print("Pessoa já cadastrada.")
             Popup('Pessoa já cadastrada.')
             self.abre_tela_pessoa()
 
         pessoa_incluida = Pessoa(nome, cpf, telefone, email)
         self.__pessoas_DAO.add(pessoa_incluida)
         self.__lista_nomes.append(pessoa_incluida.nome)
-        print(self.__pessoas_DAO.get_all(), self.__lista_nomes)
-        print("Usuário cadastrado com sucesso.")
         Popup('Usuário cadastrado com sucesso.')
         self.abre_tela_pessoa()
 
@@ -70,19 +65,13 @@ class ControladorPessoa(AbstractControladorPessoa):
                                             'Você tem certeza que deseja \n '
                                             'excluir esse cadastro?')
         confirmacao = tela_confirmacao.mostra_opcoes()
-        print(self.__lista_nomes)
         if confirmacao == 1:
             for pessoa in self.__pessoas_DAO.get_all():
-                print(pessoa.nome)
                 if pessoa.nome == nome:
-                    print(self.__pessoas_DAO.get_all())
                     self.__pessoas_DAO.remove(pessoa.cpf)
-                    print(self.__pessoas_DAO.get_all())
                     self.lista_nomes.remove(pessoa.nome)
-                    print("Usuário removido com sucesso.")
                     Popup('Usuário removido com sucesso.')
                     self.abre_tela_pessoa()
-            print("Usuário inexistente.")
             Popup('Usuário inexistente.')
             self.abre_tela_pessoa()
         else:
@@ -96,10 +85,7 @@ class ControladorPessoa(AbstractControladorPessoa):
         novo_nome, cpf, telefone, email = tela_edit_pessoa.mostra_opcoes()
         if novo_nome is None and cpf is None and telefone is None and email is None:
             self.abre_tela_pessoa()
-        print(self.__pessoas_DAO.get_all())
         for pessoa in self.__pessoas_DAO.get_all():
-            print(pessoa.nome)
-            print(nome_escolhido)
             if pessoa.nome == nome_escolhido:
                 pessoa_antiga = pessoa
                 if novo_nome != "":
@@ -112,7 +98,6 @@ class ControladorPessoa(AbstractControladorPessoa):
                             raise TelefoneInvalidoException
                         pessoa.telefone = int(telefone)
                     except TelefoneInvalidoException:
-                        print("Telefone inválido.")
                         Popup('Telefone inválido.')
                         self.abre_tela_pessoa()
                 if email != "":
@@ -120,7 +105,6 @@ class ControladorPessoa(AbstractControladorPessoa):
                 pessoa_nova = pessoa
                 self.__pessoas_DAO.edit(pessoa_antiga, pessoa_nova)
                 self.abre_tela_pessoa()
-        print("Usuário inexistente.")
         Popup('Usuário inexistente.')
         self.abre_tela_pessoa()
 
@@ -134,7 +118,6 @@ class ControladorPessoa(AbstractControladorPessoa):
                 voltar = tela_dados_pessoa.mostra_opcoes()
                 if voltar == 1 or voltar is None:
                     self.abre_tela_pessoa()
-        print("Usuário inexistente.")
         Popup('Usuário inexistente.')
         self.abre_tela_pessoa()
 

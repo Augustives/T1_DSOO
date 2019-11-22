@@ -31,7 +31,6 @@ class ControladorQuadra(AbstractControladorQuadra):
                                             ['Esporte', 'Tipo', 'Identificador'],
                                             'Cadastrar')
         esporte, tipo, identificador = tela_add_quadra.mostra_opcoes()
-        print(esporte, tipo, identificador)
         if esporte is None and tipo is None and identificador is None:
             self.abre_tela_quadra()
         try:
@@ -41,11 +40,9 @@ class ControladorQuadra(AbstractControladorQuadra):
                 if quadra.identificador == identificador:
                     raise CadastroDuplicadoException
         except CadastroDuplicadoException:
-            print("Quadra já cadastrada.")
             Popup('Quadra já cadastrada.')
             self.abre_tela_quadra()
         except ValueError:
-            print('Valores Inválidos.')
             Popup('Valores Inválidos.')
             self.abre_tela_quadra()
 
@@ -53,7 +50,6 @@ class ControladorQuadra(AbstractControladorQuadra):
         self.__quadras_DAO.add(quadra_nova)
         self.__lista_nomes.append([quadra_nova.esporte, quadra_nova.tipo,
                                   quadra_nova.identificador])
-        print("Quadra cadastrada com sucesso.")
         Popup("Quadra cadastrada com sucesso.")
         self.abre_tela_quadra()
 
@@ -74,10 +70,8 @@ class ControladorQuadra(AbstractControladorQuadra):
                         if self.__lista_nomes[i][2] == info[2]:
                             self.__lista_nomes.pop(i)
 
-                    print("Quadra removida com sucesso.")
                     Popup('Quadra removida com sucesso')
                     self.abre_tela_quadra()
-            print("Quadra inexistente.")
             Popup('Quadra inexistente')
             self.abre_tela_quadra()
         else:
@@ -106,7 +100,6 @@ class ControladorQuadra(AbstractControladorQuadra):
                     = [quadra.esporte, quadra.tipo, quadra.identificador]
                 self.__quadras_DAO.edit(quadra_antiga, quadra_alterada)
                 self.abre_tela_quadra()
-        print("Quadra inexistente.")
         Popup('Quadra inexistente.')
         self.abre_tela_quadra()
 
